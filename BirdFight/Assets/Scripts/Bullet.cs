@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
 
 	public float speed;
 	public int direction = 1;
+	public SIDE side;
+	public int power = 1;
 	// Use this for initialization
 	void Start () {
 		

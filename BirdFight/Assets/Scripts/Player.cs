@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
-
-	public Rigidbody2D rigidbodyBird;
 	public float forceCoef;
-	public Animator ani;
-	private bool _death;
-	public delegate void DeathNotify();
 	public UnityAction<int> OnScore;
 
 	public event DeathNotify OnDeath;
 
 	private Vector3 _initPos;
-    public float speed;
-    public GameObject bulletTemplate;
-	public int fireRate;
-	private float fireTimer = 0;
+	public int HP = 100;
+	public Slider slider;
 
 	// Use this for initialization
 	void Start()
@@ -35,6 +29,8 @@ public class Player : MonoBehaviour
 		if (this._death)
 			return;
 
+		slider.value = Mathf.Lerp(slider.value,  HP,  1.0f);
+
 		fireTimer += Time.deltaTime;
 
 		Vector2 pos = this.transform.position;
@@ -48,62 +44,55 @@ public class Player : MonoBehaviour
         }
 	}
 
-	public void Fire()
-    {
-		if (fireTimer > 1.0 / fireRate)
-        {
-			GameObject bullet = Instantiate(bulletTemplate);
-			bullet.transform.position = this.transform.position;
-			fireTimer = 0.0f;
-		}
-		
-    }
-
 	public void Init()
     {
 		this.transform.position = _initPos;
 		this.Idle();
 		this._death = false;
-	}
-
-	public void Idle()
-	{
-		this.rigidbodyBird.simulated = false;
-		this.ani.SetTrigger("Idle");
-	}
-
-	public void Fly()
-	{
-		//this.rigidbodyBird.simulated = true;
-		this.ani.SetTrigger("Fly");
+		HP = 100;
+		slider.value = HP;
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		Debug.Log("OnTriggerEnter2D " + col.gameObject.name);
-		if (! col.gameObject.name.Equals("ScoreArea"))
-			Die();
+		Bullet bullet = col.gameObject.GetComponent<Bullet>();
+		Enemy enemy = col.gameObject.GetComponent<Enemy>();
+		if (bullet)
+        {
+			if (bullet.side == SIDE.ENEMY)
+			{
+				this.HP -= bullet.power;
+				if (this.HP <= 0)
+				{
+					this.Die();
+				}
+			}
+		}
+
+		if (enemy && enemy.side == SIDE.ENEMY)
+		{
+			this.HP = 0;
+			this.Die();
+		}
+
+		Debug.Log("Player: OnTriggerEnter2D " + col.gameObject.name);
+		
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		Debug.Log("OnTriggerExit2D " + col.gameObject.name);
+		Debug.Log("Player: OnTriggerExit2D " + col.gameObject.name);
 		if (col.gameObject.name.Equals("ScoreArea"))
 		{
-			if (this.OnScore != null)
-            {
-				this.OnScore(1);
-            }
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		Die();
-		Debug.Log("OnCollisionEnter2D " + col.gameObject.name);
+		Debug.Log("Player: OnCollisionEnter2D " + col.gameObject.name);
 	}
 
-	public void Die()
+	public override void Die()
     {
 		this._death = true;
 		if (this.OnDeath != null)

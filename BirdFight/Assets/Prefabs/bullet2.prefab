@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4467255859104650}
   - component: {fileID: 212337156694940072}
   - component: {fileID: 114498719941459620}
+  - component: {fileID: 61334047047950042}
   m_Layer: 0
   m_Name: bullet2
   m_TagString: Untagged
@@ -41,6 +42,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61334047047950042
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1107015171208310}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.44, y: 0.21}
+    newSize: {x: 0.44, y: 0.21}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.44, y: 0.21}
+  m_EdgeRadius: 0
 --- !u!114 &114498719941459620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,6 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   direction: 1
+  side: 2
+  power: 10
 --- !u!212 &212337156694940072
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -88,7 +116,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f826a9a8d7540ab4c989d3d18814f11a, type: 3}
   m_Color: {r: 0.9245283, g: 0.056692798, b: 0.056692798, a: 1}
   m_FlipX: 0
