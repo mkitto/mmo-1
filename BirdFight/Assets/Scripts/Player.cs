@@ -8,30 +8,14 @@ public class Player : Unit
 {
 	public float forceCoef;
 	public UnityAction<int> OnScore;
-
-	public event DeathNotify OnDeath;
-
-	private Vector3 _initPos;
-	public int HP = 100;
+	
 	public Slider slider;
 
-	// Use this for initialization
-	void Start()
-	{
-		this.ani = this.GetComponent<Animator>();
-		_initPos = this.transform.position;
-		Idle();
-	}
-
 	// Update is called once per frame
-	void Update()
+	public override void OnUpdate()
 	{
-		if (this._death)
-			return;
 
 		slider.value = Mathf.Lerp(slider.value,  HP,  1.0f);
-
-		fireTimer += Time.deltaTime;
 
 		Vector2 pos = this.transform.position;
 		pos.x += Input.GetAxis("Horizontal") * Time.deltaTime * speed;
@@ -90,14 +74,5 @@ public class Player : Unit
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		Debug.Log("Player: OnCollisionEnter2D " + col.gameObject.name);
-	}
-
-	public override void Die()
-    {
-		this._death = true;
-		if (this.OnDeath != null)
-        {
-			this.OnDeath();
-        }
 	}
 }

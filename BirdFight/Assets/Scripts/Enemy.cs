@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Unit {
-	public event DeathNotify OnDeath;
 	public ENEMY_TYPE enemyType;
 	public float lifeTime;
 
@@ -11,9 +10,8 @@ public class Enemy : Unit {
 	private float _initY;
 
 	// Use this for initialization
-	void Start()
+	public override void OnStart()
 	{
-		this.ani = this.GetComponent<Animator>();
 		Fly();
 		Destroy(this.gameObject, lifeTime);
 
@@ -22,13 +20,10 @@ public class Enemy : Unit {
 	}
 
 	// Update is called once per frame
-	void Update()
+	public override void OnUpdate()
 	{
-		if (this._death)
-			return;
-
-		fireTimer += Time.deltaTime;
 		float y = 0;
+
 		if (enemyType == ENEMY_TYPE.SWING)
         {
 			y = Mathf.Sin(Time.timeSinceLevelLoad * 10f) * 2;
@@ -80,14 +75,4 @@ public class Enemy : Unit {
 		Debug.Log("Enemy: OnCollisionEnter2D " + col.gameObject.name);
 	}
 
-	public override void Die()
-	{
-		this._death = true;
-		this.ani.SetTrigger("Die");
-		if (this.OnDeath != null)
-		{
-			this.OnDeath();
-		}
-		Destroy(this.gameObject, 0.15f);
-	}
 }

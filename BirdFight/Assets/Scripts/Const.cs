@@ -9,5 +9,6 @@ public enum SIDE
 public enum ENEMY_TYPE
 {
     NORMAL,
-    SWING
+    SWING,
+    BOSS
 }

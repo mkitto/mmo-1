@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour {
-
+	public event DeathNotify OnDeath;
 	public Rigidbody2D rigidbodyBird;
 	public Animator ani;
 	protected bool _death;
@@ -15,14 +15,35 @@ public class Unit : MonoBehaviour {
 	public GameObject bulletTemplate;
 	public SIDE side;
 
+	public int HP = 100;
+
+	protected Vector3 _initPos;
+
 	// Use this for initialization
 	void Start () {
-		
+		this.ani = this.GetComponent<Animator>();
+		_initPos = this.transform.position;
+		Idle();
+		OnStart();
 	}
 	
+	public virtual void OnStart()
+    {
+
+    }
+
 	// Update is called once per frame
 	void Update () {
-		
+		if (this._death)
+			return;
+
+		fireTimer += Time.deltaTime;
+		OnUpdate();
+	}
+
+	public virtual void OnUpdate()
+	{
+
 	}
 
 	public void Idle()
@@ -49,6 +70,12 @@ public class Unit : MonoBehaviour {
 
 	public virtual void Die()
     {
-
-    }
+		this._death = true;
+		this.ani.SetTrigger("Die");
+		if (this.OnDeath != null)
+		{
+			this.OnDeath();
+		}
+		Destroy(this.gameObject, 0.15f);
+	}
 }

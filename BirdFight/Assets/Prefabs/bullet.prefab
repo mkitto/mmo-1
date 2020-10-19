@@ -81,6 +81,8 @@ MonoBehaviour:
   speed: 8
   direction: 1
   side: 1
+  power: 1
+  lifeTime: 3
 --- !u!212 &212337156694940072
 SpriteRenderer:
   m_ObjectHideFlags: 1
