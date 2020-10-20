@@ -64,6 +64,6 @@ public class UnitManager : MonoBehaviour {
 		if (!template)
 			return;
 			
-			GameObject obj = Instantiate(template, this.transform);
+		GameObject obj = Instantiate(template, this.transform);
 	}
 }

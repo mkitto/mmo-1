@@ -30,16 +30,32 @@ public class Boss : Enemy {
 
     public override void OnUpdate()
     {
+        Debug.LogError("Boss");
+        Vector3 dir = target.transform.position - battery.transform.position;
+        battery.transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
     }
 
     public override void OnStart()
     {
         StartCoroutine(FireMissile());
+        StartCoroutine(BatteryFire());
     }
 
     IEnumerator FireMissile()
     {
         yield return new WaitForSeconds(5f);
         ani.SetTrigger("Skill");
+    }
+
+    IEnumerator BatteryFire()
+    {
+        yield return new WaitForSeconds(5f);
+        while(true)
+        {
+            GameObject go = Instantiate(bulletTemplate, battery.transform.position, battery.transform.rotation);
+            Bullet bullet = go.GetComponent<Bullet>();
+            bullet.direction = (target.transform.position - go.transform.position).normalized;
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

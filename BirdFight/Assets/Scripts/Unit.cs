@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour {
 	public SIDE side;
 
 	public int HP = 100;
+	public int MaxHp = 100;
 
 	protected Vector3 _initPos;
 
@@ -78,4 +79,9 @@ public class Unit : MonoBehaviour {
 		}
 		Destroy(this.gameObject, 0.15f);
 	}
+
+	public void Damage(int power)
+    {
+		HP -= power;
+    }
 }

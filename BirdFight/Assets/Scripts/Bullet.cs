@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 	public float speed;
-	public int direction = 1;
+	public Vector3 direction = Vector3.zero;
 	public SIDE side;
 	public int power = 1;
 	public float lifeTime;
@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
 
 	public virtual void OnUpdate()
     {
-		this.transform.position += new Vector3(speed * Time.deltaTime * direction, 0.0f, 0.0f);
+		this.transform.position += speed * Time.deltaTime * direction;
 		if (!Screen.safeArea.Contains(Camera.main.WorldToScreenPoint(this.transform.position)))
 		{
 			Destroy(this.gameObject, 0.5f);

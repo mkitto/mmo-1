@@ -14,14 +14,26 @@ public class Missle : Bullet {
 
         if (target != null)
         {
-            Vector3 dir = (target.transform.position - this.transform.position).normalized;
+            Vector3 dir = target.transform.position - this.transform.position;
+            if(dir.magnitude < 0.1)
+            {
+                Explod();
+            }
             this.transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
-            this.transform.position += speed * Time.deltaTime * dir;
+            this.transform.position += speed * Time.deltaTime * dir.normalized;
         }
     }
 
     public void Launch()
     {
         running = true;
+    }
+
+    public void Explod()
+    {
+        Destroy(this.gameObject);
+        // todo: Effect
+        Player player = target.GetComponent<Player>();
+        player.Damage(power);
     }
 }

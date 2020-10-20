@@ -55,7 +55,7 @@ MonoBehaviour:
   speed: 3
   direction: 1
   side: 2
-  power: 1
+  power: 50
   lifeTime: 20
   target: {fileID: 0}
 --- !u!212 &212844163997165444
