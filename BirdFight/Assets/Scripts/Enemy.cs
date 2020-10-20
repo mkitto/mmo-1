@@ -22,7 +22,6 @@ public class Enemy : Unit {
 	// Update is called once per frame
 	public override void OnUpdate()
 	{
-		Debug.LogError("Enemy");
 		float y = 0;
 
 		if (enemyType == ENEMY_TYPE.SWING)
@@ -41,7 +40,6 @@ public class Enemy : Unit {
 		{
 			GameObject bullet = Instantiate(bulletTemplate);
 			bullet.transform.position = this.transform.position;
-			bullet.GetComponent<Bullet>().direction = Vector3.right;
 			fireTimer = 0.0f;
 		}
 	}

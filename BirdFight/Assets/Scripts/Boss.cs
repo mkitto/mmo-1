@@ -30,9 +30,12 @@ public class Boss : Enemy {
 
     public override void OnUpdate()
     {
-        Debug.LogError("Boss");
-        Vector3 dir = target.transform.position - battery.transform.position;
-        battery.transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
+        if (target)
+        {
+            Vector3 dir = target.transform.position - battery.transform.position;
+            battery.transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
+        }
+        
     }
 
     public override void OnStart()
@@ -54,7 +57,8 @@ public class Boss : Enemy {
         {
             GameObject go = Instantiate(bulletTemplate, battery.transform.position, battery.transform.rotation);
             Bullet bullet = go.GetComponent<Bullet>();
-            bullet.direction = (target.transform.position - go.transform.position).normalized;
+            if (target)
+                bullet.direction = (target.transform.position - go.transform.position).normalized;
             yield return new WaitForSeconds(1f);
         }
     }
