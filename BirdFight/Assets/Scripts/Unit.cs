@@ -19,6 +19,7 @@ public class Unit : MonoBehaviour {
 	public int MaxHp = 100;
 
 	protected Vector3 _initPos;
+	public Transform firePoint1;
 
 	// Use this for initialization
 	void Start () {

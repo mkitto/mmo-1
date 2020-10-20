@@ -39,7 +39,7 @@ public class Enemy : Unit {
 		if (fireTimer > 1.0 / fireRate)
 		{
 			GameObject bullet = Instantiate(bulletTemplate);
-			bullet.transform.position = this.transform.position;
+			bullet.transform.position = firePoint1.position;
 			fireTimer = 0.0f;
 		}
 	}
