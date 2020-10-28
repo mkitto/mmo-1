@@ -199,13 +199,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbodyBird: {fileID: 50281464916226836}
   ani: {fileID: 0}
-  enemyType: 0
   speed: 7
+  fireRate: 5
   bulletTemplate: {fileID: 1107015171208310, guid: 32b8fc554a22f5d46ae478f1b9b69772,
     type: 2}
-  fireRate: 5
-  lifeTime: 8
   side: 2
+  HP: 100
+  MaxHp: 100
+  firePoint1: {fileID: 4113828321089208}
+  enemyType: 0
+  lifeTime: 8
   range: {x: -3, y: 1}
 --- !u!212 &212265837568697094
 SpriteRenderer:

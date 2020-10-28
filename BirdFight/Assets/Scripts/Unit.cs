@@ -21,6 +21,8 @@ public class Unit : MonoBehaviour {
 	protected Vector3 _initPos;
 	public Transform firePoint1;
 
+	public float Attack;
+
 	// Use this for initialization
 	void Start () {
 		this.ani = this.GetComponent<Animator>();

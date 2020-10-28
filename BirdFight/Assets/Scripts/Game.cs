@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Game : MonoBehaviour
+public class Game : Singleton<Game>
 {
 
 	public enum GAME_STATUS
@@ -34,12 +34,13 @@ public class Game : MonoBehaviour
 	public GameObject panelGameOver;
 
 	public Player player;
-
 	public int score;
 	public Text uiScore;
 	public Text uiBestScore;
 	public Text uiRightScore;
-	public UnitManager unitManager;
+	//public UnitManager unitManager;
+	public LevelManager levelManager;
+	public int currentLevelID = 1;
 
 	public int Score
     {
@@ -59,8 +60,9 @@ public class Game : MonoBehaviour
         }
     }
 
-	void Awake()
+	new void Awake()
     {
+		base.Awake();
 		if (PlayerPrefs.HasKey("maxScore"))
 		{
 			uiBestScore.text = PlayerPrefs.GetInt("maxScore").ToString();
@@ -84,7 +86,6 @@ public class Game : MonoBehaviour
 	private void Player_OnDeath()
     {
 		this.Status = GAME_STATUS.GameOver;
-		unitManager.Stop();
     }
 
 
@@ -106,7 +107,7 @@ public class Game : MonoBehaviour
 		Debug.LogFormat("StartGame: {0}", this._status);
 		player.Fly();
 		this.Score = 0;
-		unitManager.StartRun();
+		this.levelManager.LoadLevel(this.currentLevelID);
 	}
 
 	public void UpdateUI()

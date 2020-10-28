@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1431132446691318
 GameObject:
   m_ObjectHideFlags: 1
@@ -253,7 +253,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623930396274170}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.71099997, y: 0.02, z: 0}
+  m_LocalPosition: {x: 1.43, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4829741158587444}
@@ -352,7 +352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1218649840308500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.41, y: 0, z: 0}
   m_LocalScale: {x: -8, y: 8, z: 0}
   m_Children:
   - {fileID: 4360696152610646}
@@ -393,7 +393,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345182296051290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.51, y: -0.02, z: 0}
+  m_LocalPosition: {x: -0.13, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4295557903869810}
@@ -444,7 +444,7 @@ Animator:
   m_GameObject: {fileID: 1218649840308500}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 95fc3ea76b894d447a621f946a505fa3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d1118c64fdd2c147a59ae9f4f42269e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -472,14 +472,19 @@ MonoBehaviour:
     type: 2}
   side: 2
   HP: 1000
+  MaxHp: 100
+  firePoint1: {fileID: 4829261316117588}
   enemyType: 2
   lifeTime: 99999
   range: {x: 0, y: 0}
   missleTemplate: {fileID: 1042274195019180, guid: 974accf5bce982a49932372f55567972,
     type: 2}
-  firePoint1: {fileID: 4829261316117588}
   firePoint2: {fileID: 4295557903869810}
   firePoint3: {fileID: 4438164663100864}
+  battery: {fileID: 4153058763920278}
+  target: {fileID: 0}
+  fireRate2: 2
+  UltCD: 5
 --- !u!212 &212109847997068368
 SpriteRenderer:
   m_ObjectHideFlags: 1
