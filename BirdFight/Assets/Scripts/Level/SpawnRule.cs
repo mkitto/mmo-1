@@ -15,6 +15,8 @@ public class SpawnRule : MonoBehaviour {
 	public int HP;
 	public int Attack;
 
+	private List<Unit> enemys;
+
 	float timeSinceLevelStart = 0;
 
 	float levelStartTime = 0;
@@ -25,8 +27,19 @@ public class SpawnRule : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		this.levelStartTime = Time.realtimeSinceStartup;
+
+		enemys = new List<Unit>();
 	}
 	
+	void Destroy()
+    {
+        foreach (var  item in enemys)
+        {
+			Destroy(item.gameObject);
+        }
+    }
+	
+
 	// Update is called once per frame
 	void Update () {
 		timeSinceLevelStart = Time.realtimeSinceStartup - this.levelStartTime;
@@ -40,6 +53,10 @@ public class SpawnRule : MonoBehaviour {
             {
 				timer = 0;
 				Enemy enemy= UnitManager.Instance.CreateEnemy(this.Monster.gameObject);
+				if (!enemys.Contains(enemy))
+				{
+					enemys.Add(enemy);
+				}
 				enemy.MaxHp = this.HP;
 				enemy.Attack = this.Attack;
 				num++;

@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour {
 	public virtual void OnUpdate()
     {
 		this.transform.position += speed * Time.deltaTime * direction;
-		if (!Screen.safeArea.Contains(Camera.main.WorldToScreenPoint(this.transform.position)))
+		if (!GameUtil.InScreen(this.transform.position))
 		{
 			Destroy(this.gameObject, 0.5f);
 		}

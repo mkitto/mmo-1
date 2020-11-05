@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4278833912369042}
   - component: {fileID: 114119616771149180}
   m_Layer: 0
-  m_Name: Lv1Rule1
+  m_Name: Lv2Rule2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitTime: 3
   Monster: {fileID: 114899446434959476, guid: 7ff74b05a4ad73a459137eb0117a6581, type: 2}
-  MaxNum: 5
+  MaxNum: 10
   Period: 2
   HP: 1
   Attack: 1

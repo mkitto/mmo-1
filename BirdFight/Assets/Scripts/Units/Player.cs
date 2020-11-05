@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class Player : Unit
 {
 	public float forceCoef;
-	public UnityAction<int> OnScore;
 	
 	public Slider slider;
+
+	public int life = 3;
+	public new event DeathNotify OnDeath;
 
 	// Update is called once per frame
 	public override void OnUpdate()
@@ -37,7 +39,17 @@ public class Player : Unit
 		slider.value = HP;
 	}
 
-	void OnTriggerEnter2D(Collider2D col)
+    public override void Die()
+    {
+		if (this.life <= 0)
+			this._death = true;
+		if (this.OnDeath != null)
+		{
+			this.OnDeath();
+		}
+	}
+
+    void OnTriggerEnter2D(Collider2D col)
 	{
 		Bullet bullet = col.gameObject.GetComponent<Bullet>();
 		Enemy enemy = col.gameObject.GetComponent<Enemy>();
@@ -48,7 +60,10 @@ public class Player : Unit
 				this.HP -= bullet.power;
 				if (this.HP <= 0)
 				{
+					this.life--;
 					this.Die();
+					if (this.life > 0)
+						this.HP = MaxHp;
 				}
 			}
 		}
@@ -56,7 +71,10 @@ public class Player : Unit
 		if (enemy && enemy.side == SIDE.ENEMY)
 		{
 			this.HP = 0;
+			this.life--;
 			this.Die();
+			if (this.life > 0)
+				this.HP = MaxHp;
 		}
 
 		Debug.Log("Player: OnTriggerEnter2D " + col.gameObject.name);

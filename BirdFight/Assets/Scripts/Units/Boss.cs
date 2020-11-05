@@ -51,7 +51,8 @@ public class Boss : Enemy {
         this.transform.position = new Vector3(15, 0, 0);
         yield return MoveTo(new Vector3(5, 0, 0));
         ani.SetTrigger("Fly");
-        yield return Attack();
+        this.rigidbodyBird.simulated = true;
+        yield return BossAttack();
     }
 
     IEnumerator MoveTo(Vector3 pos)
@@ -68,7 +69,7 @@ public class Boss : Enemy {
         }
     }
 
-    IEnumerator Attack()
+    IEnumerator BossAttack()
     {
         while(true)
         {
@@ -109,5 +110,33 @@ public class Boss : Enemy {
                 bullet.direction = (target.transform.position - go.transform.position).normalized;
             fireTimer2 = 0.0f;
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Bullet bullet = col.gameObject.GetComponent<Bullet>();
+        if (!bullet)
+        {
+            return;
+        }
+        Debug.Log("Enemy: OnTriggerEnter2D " + col.gameObject.name);
+        if (bullet.side == SIDE.PLAYER)
+        {
+            this.HP -= bullet.power;
+            if (this.HP <= 0)
+            {
+                this.Die();
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        Debug.Log("Enemy: OnTriggerExit2D " + col.gameObject.name);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("Enemy: OnCollisionEnter2D " + col.gameObject.name);
     }
 }

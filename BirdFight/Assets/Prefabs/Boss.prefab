@@ -471,9 +471,10 @@ MonoBehaviour:
   bulletTemplate: {fileID: 1107015171208310, guid: 32b8fc554a22f5d46ae478f1b9b69772,
     type: 2}
   side: 2
-  HP: 1000
-  MaxHp: 100
+  HP: 10
+  MaxHp: 10
   firePoint1: {fileID: 4829261316117588}
+  Attack: 0
   enemyType: 2
   lifeTime: 99999
   range: {x: 0, y: 0}

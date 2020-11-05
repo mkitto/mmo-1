@@ -25,21 +25,12 @@ public class Game : Singleton<Game>
 		set
         {
 			_status = value;
-			UpdateUI();
+			UIManager.Instance.UpdateUI();
 		}
 	}
 
-	public GameObject panelReady;
-	public GameObject panelInGame;
-	public GameObject panelGameOver;
-
 	public Player player;
 	public int score;
-	public Text uiScore;
-	public Text uiBestScore;
-	public Text uiRightScore;
-	//public UnitManager unitManager;
-	public LevelManager levelManager;
 	public int currentLevelID = 1;
 
 	public int Score
@@ -51,42 +42,37 @@ public class Game : Singleton<Game>
         set
         {
 			this.score = value;
-			this.uiScore.text = this.score.ToString();
-			this.uiRightScore.text = this.score.ToString();
-			if (this.score > Convert.ToInt32(uiBestScore.text))
-            {
-				uiBestScore.text = this.score.ToString();
-			}
         }
     }
 
 	new void Awake()
     {
 		base.Awake();
-		if (PlayerPrefs.HasKey("maxScore"))
-		{
-			uiBestScore.text = PlayerPrefs.GetInt("maxScore").ToString();
-		}
+		var obj =  Resources.Load("Level1");
+		var gameObj =  GameObject.Instantiate(obj);
+		gameObj.name = "test";
 	}
 
 	// Use this for initialization
 	void Start()
 	{
-		this.panelReady.SetActive(true);
 		player.Idle();
+		UIManager.Instance.UpdateLifeText(player.life);
 		player.OnDeath += Player_OnDeath;
-		player.OnScore = OnPlayerScore;
 	}
-
-	void OnPlayerScore(int score)
-    {
-		this.Score += score;
-    }
 
 	private void Player_OnDeath()
     {
-		this.Status = GAME_STATUS.GameOver;
-    }
+		if (this.player.life <= 0)
+        {
+			this.Status = GAME_STATUS.GameOver;
+
+		}
+		else
+        {
+			UIManager.Instance.UpdateLifeText(player.life);
+		}
+	}
 
 
 	// Update is called once per frame
@@ -98,7 +84,6 @@ public class Game : Singleton<Game>
 	void OnDestroy()
     {
 		Debug.Log("------OnDestroy");
-		PlayerPrefs.SetInt("maxScore", Convert.ToInt32(uiBestScore.text));
 	}
 
 	public void StartGame()
@@ -107,18 +92,39 @@ public class Game : Singleton<Game>
 		Debug.LogFormat("StartGame: {0}", this._status);
 		player.Fly();
 		this.Score = 0;
-		this.levelManager.LoadLevel(this.currentLevelID);
+		LevelManager.Instance.LoadLevel(this.currentLevelID);
+		UIManager.Instance.UpdateLevelName(string.Format("LEVEL {0}  {1}", LevelManager.Instance.level.LevelID, LevelManager.Instance.level.Name));
+		LevelManager.Instance.level.OnLevelEnd = OnLevelEnd;
 	}
 
-	public void UpdateUI()
+	void OnLevelEnd(Level.LEVEL_RESULT result)
     {
-		panelReady.SetActive(this._status == GAME_STATUS.Ready);
-		panelInGame.SetActive(this._status == GAME_STATUS.InGame);
-		panelGameOver.SetActive(this._status == GAME_STATUS.GameOver);
-	}
+		int maxLevel = LevelManager.Instance.levels.Count;
+		if (result == Level.LEVEL_RESULT.SUCCESS && this.currentLevelID < maxLevel)
+		{
+			LevelManager.Instance.UnloadCurLevel();
+			this.currentLevelID++;
+			Debug.Log("this.currentLevelID < LevelManager.Instance.levels.Count");
+			LevelManager.Instance.LoadLevel(this.currentLevelID);
+			LevelManager.Instance.level.OnLevelEnd = OnLevelEnd;
+			UIManager.Instance.UpdateLevelName(string.Format("LEVEL {0}  {1}", LevelManager.Instance.level.LevelID, LevelManager.Instance.level.Name));
+		}
+		else if (result == Level.LEVEL_RESULT.SUCCESS && this.currentLevelID >= maxLevel)
+		{
+			Debug.Log("this.currentLevelID >= LevelManager.Instance.levels.Count");
+			this.Status = GAME_STATUS.GameOver;
+			UIManager.Instance.UpdateLeftLife(this.player.life);
+		}
+		else
+		{
+			this.Status = GAME_STATUS.GameOver;
+			UIManager.Instance.UpdateLeftLife(this.player.life);
+		}
+    }
 
 	public void Restart()
     {
+
 		this.Status = GAME_STATUS.Ready;
 		player.Init();
 	}

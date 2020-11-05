@@ -53,12 +53,18 @@ public class Unit : MonoBehaviour {
 	public void Idle()
 	{
 		this.rigidbodyBird.simulated = false;
+
+		Debug.Log("Idel");
+
 		this.ani.SetTrigger("Idle");
 	}
 
 	public void Fly()
 	{
 		this.rigidbodyBird.simulated = true;
+
+		Debug.Log("Fly");
+
 		this.ani.SetTrigger("Fly");
 	}
 
