@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ExtremeWorld",
+    "\\ExtremeWorld\\mmowork",
+    "\\ExtremeWorld\\mmowork\\Src",
+    "\\ExtremeWorld\\mmowork\\Src\\Server",
+    "\\ExtremeWorld\\mmowork\\Src\\Server\\GameServer",
+    "\\ExtremeWorld\\mmowork\\Src\\Server\\GameServer\\GameServer"
+  ],
+  "SelectedNode": "\\ExtremeWorld\\mmowork\\Src\\Server\\GameServer\\GameServer\\Core",
+  "PreviewInSolutionExplorer": false
+}
