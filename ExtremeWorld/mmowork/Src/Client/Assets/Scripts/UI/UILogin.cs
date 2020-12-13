@@ -22,7 +22,8 @@ public class UILogin : MonoBehaviour {
 	{
 		if(result == Result.Success)
         {
-			MessageBox.Show(msg, "成功", MessageBoxType.Information);
+			// 登录成功，进入角色选择
+			SceneManager.Instance.LoadScene("CharSelect");
         }
 		else
         {

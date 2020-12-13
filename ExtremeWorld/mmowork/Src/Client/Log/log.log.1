@@ -1,6 +1,27 @@
-2020-11-27 08:05:20,988 [ 1] INFO  Unity: LoadingManager start
-2020-11-27 08:05:23,910 [ 1] INFO  Unity: OnDestroy NetworkManager.
-2020-11-27 08:05:23,911 [ 1] WARN  Unity: CloseConnection(), errorCode: 1007
+2020-12-14 07:45:23,829 [ 1] INFO  Unity: LoadingManager start
+2020-12-14 07:45:27,025 [ 1] INFO  Unity: DataManager > DataManager()
+2020-12-14 07:45:37,258 [ 1] INFO  Unity: UserLoginRequest::user :hello psw:123
+2020-12-14 07:45:37,259 [ 1] INFO  Unity: ConnectToServer() Start 
+2020-12-14 07:45:37,263 [ 1] INFO  Unity: DoConnect
+2020-12-14 07:45:37,264 [ 1] INFO  Unity: NetClient.DoConnect on 127.0.0.1:8000
+2020-12-14 07:45:37,266 [ 1] INFO  Unity: Connect[0] to server 127.0.0.1:8000
+
+2020-12-14 07:45:37,269 [ 1] INFO  Unity: LoadingMesager::OnGameServerConnect :0 reason:Success
+2020-12-14 07:45:37,349 [ 1] INFO  Unity: OnUserRegister:Success [None]
+2020-12-14 07:45:37,351 [ 1] INFO  Unity: LoadLevel: CharSelect
+2020-12-14 07:45:37,473 [ 1] INFO  Unity: LevelLoadCompleted:1
+2020-12-14 07:45:37,474 [ 1] INFO  Unity: ------UICharacterSlect0
+2020-12-14 07:45:37,475 [ 1] INFO  Unity: ------UICharacterSlect1
+2020-12-14 07:45:40,666 [ 1] INFO  Unity: SendCharacterCreate::charName :ada cls:Warrior
+2020-12-14 07:45:40,694 [ 1] INFO  Unity: OnUserRegister:Success [None]
+2020-12-14 07:45:40,695 [ 1] ERROR Unity: Message handler exception:, Object reference not set to an instance of an object, Assembly-CSharp,   at Services.UserService.OnUserCreateCharacter (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse response) [0x0003e] in F:\Github\LearnUnity\LearnUnity\ExtremeWorld\mmowork\Src\Client\Assets\Scripts\Services\UserService.cs:164 
+  at Network.MessageDistributer`1[System.Object].RaiseEvent[UserCreateCharacterResponse] (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse msg) [0x00000] in <filename unknown>:0 
+2020-12-14 07:45:40,696 [ 1] FATAL Unity: <log4net.Error>Exception during StringFormat: Input string was not in a correct format. <format>{0
+{1}</format><args>{NullReferenceException: Object reference not set to an instance of an object, Services.UserService.OnUserCreateCharacter (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse response) (at Assets/Scripts/Services/UserService.cs:164)
+Network.MessageDistributer`1[System.Object].RaiseEvent[UserCreateCharacterResponse] (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse msg)
+}</args></log4net.Error>
+2020-12-14 07:51:18,609 [ 1] INFO  Unity: OnDestroy NetworkManager.
+2020-12-14 07:51:18,610 [ 1] WARN  Unity: CloseConnection(), errorCode: 1007
 UnityEngine.Debug:LogWarning(Object)
 Network.NetClient:CloseConnection(Int32) (at Assets/Scripts/Network/NetClient.cs:180)
 Network.NetClient:OnDestroy() (at Assets/Scripts/Network/NetClient.cs:175)
