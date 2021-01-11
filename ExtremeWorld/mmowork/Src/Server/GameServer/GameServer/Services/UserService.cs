@@ -98,23 +98,38 @@ namespace GameServer.Services
 
             TCharacter character = new TCharacter()
             {
-                TID = (int)request.Class,
                 Name = request.Name,
                 Class = (int)request.Class,
+                TID = (int)request.Class,
                 MapID = 1,
                 MapPosX = 5000,
                 MapPosY = 4000,
                 MapPosZ = 820,
             };
 
+            //NCharacterInfo info = new NCharacterInfo();
+            //info.Id = (int)request.Class;
+            //info.Name = request.Name;
+            //info.Class = (CharacterClass)request.Class;
+            //info.mapId = 1;
+            //info.Entity.Position.X = 5000;
+            //info.Entity.Position.Y = 4000;
+            //info.Entity.Position.Z = 820;
+
             DBService.Instance.Entities.Characters.Add(character);
+
+            Log.InfoFormat("-------1Characters.Count{0}", sender.Session.User.Player.Characters.Count);
+
             sender.Session.User.Player.Characters.Add(character);
+
+            Log.InfoFormat("-------2Characters.Count{0}", sender.Session.User.Player.Characters.Count);
             DBService.Instance.Entities.SaveChanges();
 
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
             message.Response.createChar = new UserCreateCharacterResponse();
             message.Response.createChar.Result = Result.Success;
+            Log.InfoFormat("-------3Characters.Count{0}", message.Response.createChar.Characters.Count);
             message.Response.createChar.Errormsg = "None";
 
             byte[] data = PackageHandler.PackMessage(message);

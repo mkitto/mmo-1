@@ -1,26 +1,39 @@
-2020-12-14 07:07:24,878 [ 1] INFO  Unity: LoadingManager start
-2020-12-14 07:07:34,163 [ 1] INFO  Unity: UserLoginRequest::user :hello psw:123
-2020-12-14 07:07:34,164 [ 1] INFO  Unity: ConnectToServer() Start 
-2020-12-14 07:07:34,168 [ 1] INFO  Unity: DoConnect
-2020-12-14 07:07:34,169 [ 1] INFO  Unity: NetClient.DoConnect on 127.0.0.1:8000
-2020-12-14 07:07:34,171 [ 1] INFO  Unity: Connect[0] to server 127.0.0.1:8000
+2021-01-06 22:39:21,820 [ 1] INFO  Unity: LoadingManager start
+2021-01-06 22:39:25,020 [ 1] INFO  Unity: DataManager > DataManager()
+2021-01-06 22:39:37,842 [ 1] INFO  Unity: SendLogin::user :12580 psw:12580
+2021-01-06 22:39:37,843 [ 1] INFO  Unity: ConnectToServer() Start 
+2021-01-06 22:39:37,847 [ 1] INFO  Unity: DoConnect
+2021-01-06 22:39:37,848 [ 1] INFO  Unity: NetClient.DoConnect on 127.0.0.1:8000
+2021-01-06 22:39:37,850 [ 1] INFO  Unity: Connect[0] to server 127.0.0.1:8000
 
-2020-12-14 07:07:34,174 [ 1] INFO  Unity: LoadingMesager::OnGameServerConnect :0 reason:Success
-2020-12-14 07:07:34,257 [ 1] INFO  Unity: OnUserRegister:Success [None]
-2020-12-14 07:07:34,258 [ 1] INFO  Unity: LoadLevel: CharSelect
-2020-12-14 07:07:34,364 [ 1] INFO  Unity: LevelLoadCompleted:1
-2020-12-14 07:07:34,365 [ 1] INFO  Unity: DataManager > DataManager()
-2020-12-14 07:07:34,441 [ 1] FATAL Unity: <log4net.Error>Exception during StringFormat: Input string was not in a correct format. <format>{0
-{1}</format><args>{FormatException: Input string was not in the correct format, System.Int32.Parse (System.String s, NumberStyles style, IFormatProvider provider) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/Int32.cs:640)
-System.Int32.Parse (System.String s, IFormatProvider provider) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/Int32.cs:208)
-System.Convert.ToInt32 (System.String value, IFormatProvider provider) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/Convert.cs:1277)
-System.String.System.IConvertible.ToInt32 (IFormatProvider provider) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:2391)
-System.Convert.ToType (System.Object value, System.Type conversionType, IFormatProvider provider, Boolean try_target_to_type) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/Convert.cs:2910)
-System.Convert.ChangeType (System.Object value, System.Type conversionType, IFormatProvider provider) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/Convert.cs:2511)
-Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType (Newtonsoft.Json.JsonReader reader, System.Object value, System.Globalization.CultureInfo culture, Newtonsoft.Json.Serialization.JsonContract contract, System.Type targetType)
-Rethrow as JsonSerializationException: Error converting value "ID" to type 'System.Int32'. Path '1.ID', line 3, position 9.
-Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType (Newtonsoft.Json.JsonReader reader, System.Object value, System.Globalization.CultureInfo culture, Newtonsoft.Json.Serialization.JsonContract contract, System.Type targetType)
-Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateDictionary (IDictionary dictionary, Newtonsoft.Json.JsonReader reader, Newtonsoft.Json.Serialization.JsonDictionaryContract contract, Newtonsoft.Json.Serialization.JsonProperty containerProperty, System.String id)
-Rethrow as JsonSerializationException: Could not convert string 'ID' to dictionary key type 'System.Int32'. Create a TypeConverter to convert from the string to the key type object. Path '1.ID', line 3, position 9.
-Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateDictionary (IDictionary dictionary, Newtonsoft.Json.JsonReader reader, Newtonsoft.Json.Serialization.JsonDictionaryContract contract, Newtonsoft.Json.Serialization.JsonProperty containerProperty, System.String id)
+2021-01-06 22:39:37,853 [ 1] INFO  Unity: LoadingMesager::OnGameServerConnect :0 reason:Success
+2021-01-06 22:39:37,934 [ 1] INFO  Unity: OnUserRegister:Success [None]
+2021-01-06 22:39:37,936 [ 1] INFO  Unity: LoadLevel: CharSelect
+2021-01-06 22:39:38,055 [ 1] INFO  Unity: LevelLoadCompleted:1
+2021-01-06 22:39:43,283 [ 1] INFO  Unity: ------OnClickCreateWizard
+2021-01-06 22:39:43,284 [ 1] INFO  Unity: SendCharacterCreate::charName :333 cls:Wizard
+2021-01-06 22:39:43,310 [ 1] INFO  Unity: OnUserCreateCharacter:Success [None]
+2021-01-06 22:39:43,312 [ 1] ERROR Unity: Message handler exception:, Index (zero based) must be greater than or equal to zero and less than the size of the argument list., mscorlib,   at System.String.FormatHelper (System.Text.StringBuilder result, IFormatProvider provider, System.String format, System.Object[] args) [0x000e8] in /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:1925 
+  at System.String.Format (IFormatProvider provider, System.String format, System.Object[] args) [0x00000] in /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:1873 
+  at System.String.Format (System.String format, System.Object[] args) [0x00000] in /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:1868 
+  at UnityEngine.DebugLogHandler.LogFormat (LogType logType, UnityEngine.Object context, System.String format, System.Object[] args) [0x00005] in C:\buildslave\unity\build\Runtime\Export\Logger\DebugLogHandler.cs:9 
+  at UnityEngine.Logger.LogFormat (LogType logType, System.String format, System.Object[] args) [0x00017] in C:\buildslave\unity\build\Runtime\Export\Logger\Logger.cs:113 
+  at UnityEngine.Debug.LogFormat (System.String format, System.Object[] args) [0x00009] in C:\buildslave\unity\build\Runtime\Export\Debug.bindings.cs:108 
+  at Services.UserService.OnUserCreateCharacter (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse response) [0x00098] in F:\Github\LearnUnity\LearnUnity\ExtremeWorld\mmowork\Src\Client\Assets\Scripts\Services\UserService.cs:171 
+  at Network.MessageDistributer`1[System.Object].RaiseEvent[UserCreateCharacterResponse] (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse msg) [0x00000] in <filename unknown>:0 
+2021-01-06 22:39:43,313 [ 1] FATAL Unity: <log4net.Error>Exception during StringFormat: Input string was not in a correct format. <format>{0
+{1}</format><args>{FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list., System.String.FormatHelper (System.Text.StringBuilder result, IFormatProvider provider, System.String format, System.Object[] args) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:1925)
+System.String.Format (IFormatProvider provider, System.String format, System.Object[] args) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:1873)
+System.String.Format (System.String format, System.Object[] args) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/String.cs:1868)
+UnityEngine.DebugLogHandler.LogFormat (LogType logType, UnityEngine.Object context, System.String format, System.Object[] args) (at C:/buildslave/unity/build/Runtime/Export/Logger/DebugLogHandler.cs:9)
+UnityEngine.Logger.LogFormat (LogType logType, System.String format, System.Object[] args) (at C:/buildslave/unity/build/Runtime/Export/Logger/Logger.cs:113)
+UnityEngine.Debug.LogFormat (System.String format, System.Object[] args) (at C:/buildslave/unity/build/Runtime/Export/Debug.bindings.cs:108)
+Services.UserService.OnUserCreateCharacter (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse response) (at Assets/Scripts/Services/UserService.cs:171)
+Network.MessageDistributer`1[System.Object].RaiseEvent[UserCreateCharacterResponse] (System.Object sender, SkillBridge.Message.UserCreateCharacterResponse msg)
 }</args></log4net.Error>
+2021-01-06 22:40:33,722 [ 1] INFO  Unity: OnDestroy NetworkManager.
+2021-01-06 22:40:33,723 [ 1] WARN  Unity: CloseConnection(), errorCode: 1007
+UnityEngine.Debug:LogWarning(Object)
+Network.NetClient:CloseConnection(Int32) (at Assets/Scripts/Network/NetClient.cs:180)
+Network.NetClient:OnDestroy() (at Assets/Scripts/Network/NetClient.cs:175)
+

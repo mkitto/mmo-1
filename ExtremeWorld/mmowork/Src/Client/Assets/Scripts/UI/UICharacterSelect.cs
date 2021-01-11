@@ -25,19 +25,23 @@ public class UICharacterSelect : MonoBehaviour {
 	public Button btnArch;
 
 	public Button btnOK;
+	public Button btnPlay;
 
 	public List<GameObject> uiChars = new List<GameObject>();
 
 	public UICharacterView CharacterView;
 
+	public GameObject uiCharInfo;
+	public Transform uiCharList;
+
+	private int selectCharacterIdx = -1;
+
 	// Use this for initialization
 	void Start () {
-		Debug.Log("------UICharacterSlect0");
 		initUI();
 		InitCharacterSelect(false);
 		UserService.Instance.OnCharacterCreate = OnCharacterCreate;
 		OnSelectCharClass(1);
-		Debug.Log("------UICharacterSlect1");
 	}
 
 	public void InitCharacterSelect(bool init)
@@ -52,8 +56,50 @@ public class UICharacterSelect : MonoBehaviour {
 				Destroy(old);
             }
 			uiChars.Clear();
+
+			Debug.LogFormat("Character count: {0}", User.Instance.Info.Player.Characters.Count);
+
+			for(int i = 0; i < User.Instance.Info.Player.Characters.Count; ++i)
+            {
+				GameObject go = Instantiate(uiCharInfo, this.uiCharList);
+				UICharInfo chrInfo = go.GetComponent<UICharInfo>();
+				chrInfo.info = User.Instance.Info.Player.Characters[i];
+
+				Button button = go.GetComponent<Button>();
+				int idx = i;
+				button.onClick.AddListener(() =>
+				{
+					OnSelectCharacter(idx);
+				});
+
+				uiChars.Add(go);
+				go.SetActive(true);
+            }				
         }
 	}
+
+	public void OnSelectCharacter(int idx)
+    {
+		this.selectCharacterIdx = idx;
+		var cha = User.Instance.Info.Player.Characters[idx];
+		Debug.LogFormat("Select Char:[{0}]{1}[{2}]", cha.Id, cha.Name, cha.Class);
+		User.Instance.CurrentCharacter = cha;
+		CharacterView.CurrentCharacter = ((int)cha.Class - 1);
+
+		for(int i = 0; i < User.Instance.Info.Player.Characters.Count; i++)
+        {
+			UICharInfo ci = this.uiChars[i].GetComponent<UICharInfo>();
+			ci.Selected = idx == i;
+        }
+    }
+
+	public void OnClickPlay()
+    {
+		if(selectCharacterIdx >= 0)
+        {
+			UserService.Instance.SendGameEnter(selectCharacterIdx);
+        }
+    }
 
 	public void OnSelectCharClass(int charClass)
     {
@@ -74,6 +120,9 @@ public class UICharacterSelect : MonoBehaviour {
 			MessageBox.Show("请输入角色名称");
 			return;
         }
+
+		Debug.LogFormat("------OnClickCreate{0}", this.charClass);
+
 		UserService.Instance.SendCharacterCreate(this.charName.text, this.charClass);
     }
 
@@ -94,6 +143,8 @@ public class UICharacterSelect : MonoBehaviour {
 		btnArch = root.transform.Find("PanelCreate/BtnArch").GetComponent<Button>();
 		charName = root.transform.Find("PanelCreate/InputField/Text").GetComponent<Text>();
 		btnOK = root.transform.Find("PanelCreate/ButtonOK").GetComponent<Button>();
+		btnPlay = root.transform.Find("PanelSelect/ButtonPlay").GetComponent<Button>();
+		uiCharList = root.transform.Find("PanelSelect/ScrollView/Viewport/Content").transform;
 
 		GameObject chrViewRoot = GameObject.Find("CharacterView");
 		CharacterView = chrViewRoot.transform.GetComponent<UICharacterView>();
@@ -102,6 +153,7 @@ public class UICharacterSelect : MonoBehaviour {
 		btnWizard.onClick.AddListener(() => { OnSelectCharClass(2); });
 		btnArch.onClick.AddListener(() => { OnSelectCharClass(3); });
 		btnOK.onClick.AddListener(OnClickCreate);
+		btnPlay.onClick.AddListener(OnClickPlay);
 	}
 
 	void OnCharacterCreate(Result result, string message)

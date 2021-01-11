@@ -116,7 +116,7 @@ namespace Services
 
         public void SendLogin(string user, string psw)
         {
-            Debug.LogFormat("UserLoginRequest::user :{0} psw:{1}", user, psw);
+            Debug.LogFormat("SendLogin::user :{0} psw:{1}", user, psw);
             NetMessage message = new NetMessage();
             message.Request = new NetMessageRequest();
             message.Request.userLogin = new UserLoginRequest();
@@ -156,13 +156,19 @@ namespace Services
             }
         }
 
+        public void SendGameEnter(int selectCharacterIdx)
+        {
+            Debug.LogFormat("SendGameEnter::selectCharacterIdx: {0}", selectCharacterIdx);
+        }
+
         void OnUserCreateCharacter(object sender, UserCreateCharacterResponse response)
         {
-            Debug.LogFormat("OnUserRegister:{0} [{1}]", response.Result, response.Errormsg);
+            Debug.LogFormat("OnUserCreateCharacter:{0} [{1}]", response.Result, response.Errormsg);
             if (response.Result == Result.Success)
             {
                 Models.User.Instance.Info.Player.Characters.Clear();
                 Models.User.Instance.Info.Player.Characters.AddRange(response.Characters);
+                Debug.LogFormat("------OnUserCreateCharacter: {0}", response.Characters.Count);
             }
 
             if (this.OnCharacterCreate != null)
