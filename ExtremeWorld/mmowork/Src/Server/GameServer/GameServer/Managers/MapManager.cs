@@ -23,7 +23,6 @@ namespace GameServer.Managers
         }
 
 
-
         public Map this[int key]
         {
             get

@@ -27,6 +27,7 @@ namespace GameServer
             network.Init(8000);  // 初始化端口号
             DBService.Instance.Init();
             DataManager.Instance.Load();
+            MapService.Instance.Init();
             UserService.Instance.Init();
             thread = new Thread(new ThreadStart(this.Update));
             return true;
