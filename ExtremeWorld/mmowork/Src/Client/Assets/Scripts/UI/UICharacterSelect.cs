@@ -26,6 +26,7 @@ public class UICharacterSelect : MonoBehaviour {
 
 	public Button btnOK;
 	public Button btnPlay;
+	public Button btnNew;
 
 	public List<GameObject> uiChars = new List<GameObject>();
 
@@ -39,7 +40,7 @@ public class UICharacterSelect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initUI();
-		InitCharacterSelect(false);
+		InitCharacterSelect(true);
 		UserService.Instance.OnCharacterCreate = OnCharacterCreate;
 		OnSelectCharClass(1);
 	}
@@ -95,14 +96,22 @@ public class UICharacterSelect : MonoBehaviour {
 
 	public void OnClickPlay()
     {
+		Debug.LogFormat("------OnClickPlay: {}", selectCharacterIdx);
 		if(selectCharacterIdx >= 0)
         {
 			UserService.Instance.SendGameEnter(selectCharacterIdx);
         }
     }
 
+	public void OnClickNew()
+	{
+		Debug.Log("------OnClickNew");
+		this.InitCharacterSelect(false);
+	}
+
 	public void OnSelectCharClass(int charClass)
     {
+		Debug.LogFormat("------OnSelectCharClass", charClass);
 		this.charClass = (CharacterClass)charClass;
 		CharacterView.CurrentCharacter = charClass - 1;
 		for (int i = 0; i < 3; ++i)
@@ -144,7 +153,10 @@ public class UICharacterSelect : MonoBehaviour {
 		charName = root.transform.Find("PanelCreate/InputField/Text").GetComponent<Text>();
 		btnOK = root.transform.Find("PanelCreate/ButtonOK").GetComponent<Button>();
 		btnPlay = root.transform.Find("PanelSelect/ButtonPlay").GetComponent<Button>();
+		btnNew = root.transform.Find("PanelSelect/ButtonNew").GetComponent<Button>();
 		uiCharList = root.transform.Find("PanelSelect/ScrollView/Viewport/Content").transform;
+		uiCharInfo = root.transform.Find("PanelSelect/ScrollView/Viewport/Content/CharInfo").gameObject;
+
 
 		GameObject chrViewRoot = GameObject.Find("CharacterView");
 		CharacterView = chrViewRoot.transform.GetComponent<UICharacterView>();
@@ -154,6 +166,7 @@ public class UICharacterSelect : MonoBehaviour {
 		btnArch.onClick.AddListener(() => { OnSelectCharClass(3); });
 		btnOK.onClick.AddListener(OnClickCreate);
 		btnPlay.onClick.AddListener(OnClickPlay);
+		btnNew.onClick.AddListener(OnClickNew);
 	}
 
 	void OnCharacterCreate(Result result, string message)

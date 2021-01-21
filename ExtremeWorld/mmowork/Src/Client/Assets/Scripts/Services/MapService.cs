@@ -5,7 +5,7 @@ using UnityEngine;
 using Common.Data;
 using SkillBridge.Message;
 using Models;
-
+using Services;
 
 public class MapService : Singleton<MapService>, IDisposable
 {

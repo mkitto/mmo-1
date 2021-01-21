@@ -25,8 +25,10 @@ public class UICharInfo : MonoBehaviour {
 		if (info != null)
         {
 			this.charClass.text = this.info.Class.ToString();
+			Debug.LogFormat("charClass.text: {0}", this.charClass.text);
 			this.charName.text = this.info.Name;
-        }
+			Debug.LogFormat("charName.text: {0}", this.charName.text);
+		}
 	}
 	
 	// Update is called once per frame
@@ -36,9 +38,9 @@ public class UICharInfo : MonoBehaviour {
 
 	void initUI()
     {
-		GameObject root = GameObject.Find("CharInfo");
+		GameObject root = this.gameObject;
 		charClass = root.transform.Find("Image/Type").GetComponent<Text>();
-		charName = root.transform.Find("Name").GetComponent<Text>();
+        charName = root.transform.Find("Name").GetComponent<Text>();
 		highlight = root.transform.Find("Img_Select").GetComponent<Image>();
 	}
 }

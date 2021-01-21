@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using Common;
 
 using SkillBridge.Message;
+using Entities;
 
 namespace Services
 {

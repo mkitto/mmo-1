@@ -18,6 +18,7 @@ namespace GameServer.Services
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserRegisterRequest>(this.OnRegister);
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserLoginRequest>(this.OnLogin);
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserCreateCharacterRequest>(this.OnCreateCharacter);
+
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserGameEnterRequest>(this.OnGameEnter);
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserGameLeaveRequest>(this.OnGameLeave);
         }
@@ -30,6 +31,7 @@ namespace GameServer.Services
         private void OnLogin(NetConnection<NetSession> sender, UserLoginRequest request)
         {
             Log.InfoFormat("UserLoginRequest: User:{0}    Pass:{1}", request.User, request.Passward);
+
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
             message.Response.userLogin = new UserLoginResponse();
