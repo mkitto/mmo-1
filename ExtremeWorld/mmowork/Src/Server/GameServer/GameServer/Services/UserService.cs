@@ -125,6 +125,13 @@ namespace GameServer.Services
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
             message.Response.createChar = new UserCreateCharacterResponse();
+
+            foreach(TCharacter info in sender.Session.User.Player.Characters)
+            {
+                Character chr = new Character(0, info);
+                message.Response.createChar.Characters.Add(chr.Info);
+            }
+
             message.Response.createChar.Result = Result.Success;
             Log.InfoFormat("-------3Characters.Count{0}", message.Response.createChar.Characters.Count);
             message.Response.createChar.Errormsg = "None";
