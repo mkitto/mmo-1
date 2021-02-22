@@ -96,7 +96,7 @@ public class UICharacterSelect : MonoBehaviour {
 
 	public void OnClickPlay()
     {
-		Debug.LogFormat("------OnClickPlay: {}", selectCharacterIdx);
+		Debug.LogFormat("------OnClickPlay: {0}", selectCharacterIdx);
 		if(selectCharacterIdx >= 0)
         {
 			UserService.Instance.SendGameEnter(selectCharacterIdx);

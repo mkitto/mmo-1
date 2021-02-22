@@ -31,18 +31,20 @@ public class MapService : Singleton<MapService>, IDisposable
 
     private void OnMapCharacterEnter(object sender, MapCharacterEnterResponse response)
     {
-        // 当前角色切换地图
         foreach (var cha in response.Characters)
         {
             if(User.Instance.CurrentCharacter.Id == cha.Id)
             {
+                // 更新当前角色数据
                 User.Instance.CurrentCharacter = cha;
             }
             CharacterManager.Instance.AddCharacter(cha);
         }
         if(CurrentMapId != response.mapId)
         {
-            
+            // 进入地图
+            this.EnterMap(response.mapId);
+            this.CurrentMapId = response.mapId;
         }
     }
 
