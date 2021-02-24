@@ -56,3 +56,10 @@ ipch/
 *.vsp
 *.vspx
 
+
+
+# Custom
+App.config
+Entities.Designer.cs
+GameSever.csproj
+Setting.Designer.cs
