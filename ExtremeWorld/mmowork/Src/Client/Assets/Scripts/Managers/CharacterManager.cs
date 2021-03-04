@@ -9,7 +9,7 @@ using Common;
 using SkillBridge.Message;
 using Entities;
 
-namespace Services
+namespace Managers
 {
     /// <summary>
     /// author：Gochen Ryan

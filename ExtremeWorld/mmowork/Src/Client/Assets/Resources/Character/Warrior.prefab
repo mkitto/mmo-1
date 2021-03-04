@@ -685,6 +685,7 @@ GameObject:
   - component: {fileID: 54266268660748980}
   - component: {fileID: 136956674882032602}
   - component: {fileID: 114653519336033152}
+  - component: {fileID: 114259536612774264}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -1415,6 +1416,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114259536612774264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1953393978184550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582510a2d24a22d47ad8297314995dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 54266268660748980}
+  rotateSpeed: 2
+  turnAngle: 10
+  speed: 0
+  entityController: {fileID: 0}
+  onAir: 0
 --- !u!114 &114653519336033152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1426,8 +1444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba719d3703508b4a9752a8e18b42e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  rb: {fileID: 0}
+  anim: {fileID: 95055794356735632}
+  rb: {fileID: 54266268660748980}
   position: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   lastPosition: {x: 0, y: 0, z: 0}

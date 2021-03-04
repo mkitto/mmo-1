@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 54410161534690062}
   - component: {fileID: 136539239406785056}
   - component: {fileID: 114584180747568788}
+  - component: {fileID: 114181977766883368}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -2463,6 +2464,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114181977766883368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442858012577984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582510a2d24a22d47ad8297314995dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 54410161534690062}
+  rotateSpeed: 2
+  turnAngle: 10
+  speed: 0
+  entityController: {fileID: 0}
+  onAir: 0
 --- !u!114 &114584180747568788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2474,8 +2492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba719d3703508b4a9752a8e18b42e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  rb: {fileID: 0}
+  anim: {fileID: 95885828214715756}
+  rb: {fileID: 54410161534690062}
   position: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   lastPosition: {x: 0, y: 0, z: 0}

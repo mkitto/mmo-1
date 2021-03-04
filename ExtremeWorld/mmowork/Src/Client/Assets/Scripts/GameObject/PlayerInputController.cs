@@ -5,11 +5,8 @@ using UnityEngine;
 
 using SkillBridge.Message;
 
-/*
- * 控制本地用户输入
- */
-public class PlayerInpurController : MonoBehaviour
-{
+public class PlayerInputController : MonoBehaviour {
+
     public Rigidbody rb;
     SkillBridge.Message.CharacterState state;
 
@@ -68,9 +65,9 @@ public class PlayerInpurController : MonoBehaviour
             }
             this.rb.velocity = this.rb.velocity.y * Vector3.up + GameObjectTool.LogicToWorld(character.direction) * (this.character.speed + 9.81f) / 100f;
         }
-        else if (v <  -0.01)
+        else if (v < -0.01)
         {
-            if(state != SkillBridge.Message.CharacterState.Move)
+            if (state != SkillBridge.Message.CharacterState.Move)
             {
                 state = SkillBridge.Message.CharacterState.Move;
                 this.character.MoveBack();
@@ -94,7 +91,7 @@ public class PlayerInpurController : MonoBehaviour
         }
 
         float h = Input.GetAxis("Horizontal");
-        if(h < -0.1 || h > 0.1)
+        if (h < -0.1 || h > 0.1)
         {
             this.transform.Rotate(0, h * rotateSpeed, 0);
             Vector3 dir = GameObjectTool.LogicToWorld(character.direction);
