@@ -5,8 +5,8 @@ using UnityEngine;
 
 using SkillBridge.Message;
 
-public class PlayerInputController : MonoBehaviour {
-
+public class PlayerInputController : MonoBehaviour
+{
     public Rigidbody rb;
     SkillBridge.Message.CharacterState state;
 

@@ -8,7 +8,7 @@ using SkillBridge.Message;
 using Models;
 using Managers;
 
-public class GameObjectManger : MonoBehaviour
+public class GameObjectManager : MonoBehaviour
 {
     Dictionary<int, GameObject> Characters = new Dictionary<int, GameObject>();
     // Use this for initialization
