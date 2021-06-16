@@ -1,11 +1,20 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
-autonumber
+class MonoBehaviour{
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+class LoadingManager{
+    -Start()
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+}
+
+class UILogin{
+    +username
+    +password
+    +buttonLogin
+    -OnLogin(Result result, string msg)
+}
+
+MonoBehaviour <|-- UILogin
+
 @enduml
