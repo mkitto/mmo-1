@@ -1,0 +1,14 @@
+@startuml
+actor Server
+Server -> UserService: 回包，UserCreateCharacterResponse
+UserService -> Models.User: 更新Uer单例角色信息
+alt success
+UserService -> UICharacterSelect: 选择角色
+else failure
+UserService -> MessageBox: 登录失败，显示弹窗
+MessageBox -> Resloader: 没有缓存对象，根据预制体路径加载资源
+Resloader -> Resources: 根据预制体路径加载资源
+Resources --> Resloader: 返回Object对象
+Resloader -->MessageBox: 返回Object对象
+end
+@enduml

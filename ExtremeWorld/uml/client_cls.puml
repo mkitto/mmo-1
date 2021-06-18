@@ -1,20 +1,50 @@
 @startuml
 
+class UserService<<Singleton>>{
+    +OnRegister: UnityAction<Result, string>
+    +OnLogin: UnityAction<Result, string>
+    +OnCharacterCreate: UnityAction<Result, string>
+}
+
 class MonoBehaviour{
+     -Start()
+     -Update()
 }
 
 class LoadingManager{
-    -Start()
-
 }
 
 class UILogin{
-    +username
-    +password
-    +buttonLogin
-    -OnLogin(Result result, string msg)
+    +username:InputField
+    +password:InputField
+    -OnLogin(Result, string)
+}
+
+class UICharacterView{
+    -currentCharacter:int
+    +Characters:List
+}
+
+class UICharacterSelect{
+    -charClass:enum
+    -selectCharacterIdx:int
+    +panelCreate:GameObject
+    +panelSelect:GameObject
+    +uiChars:List
+
+}
+
+class MessageBox{
+    -cacheObject: Object
+    +Show(string, string, MessageBoxType, string, string)
+}
+
+class Resloader{
+    +static T Load<T>(string path) where T : UnityEngine.Object
 }
 
 MonoBehaviour <|-- UILogin
-
+MonoBehaviour <|-- UICharacterView
+MonoBehaviour <|-- UICharacterSelect
+MonoBehaviour <|-- LoadingManager
 @enduml
