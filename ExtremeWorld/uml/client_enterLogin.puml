@@ -1,0 +1,15 @@
+@startuml
+actor Server
+Server -> UserService: 回包，UserLoginResponse
+alt success
+UserService -> SceneManager: 登录成功，进入角色选择界面
+SceneManager -> UnityEngine.SceneManagement.SceneManager: 异步加载CharSelect场景
+
+else failure
+UserService -> MessageBox: 登录失败，显示弹窗
+MessageBox -> Resloader: 没有缓存对象，根据预制体路径加载资源
+Resloader -> Resources: 根据预制体路径加载资源
+Resources --> Resloader: 返回Object对象
+Resloader -->MessageBox: 返回Object对象
+end
+@enduml
