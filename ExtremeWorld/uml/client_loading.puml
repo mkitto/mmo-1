@@ -1,0 +1,25 @@
+@startuml
+actor Player
+Player -> LoadingManager: 启动游戏
+LoadingManager -> UnityLogger: 初始化日志
+LoadingManager -> Log: 初始化日志
+LoadingManager -> DataManager: 生成单例\n加载导表数据
+note right
+导表：
+1. 地图
+2. 角色
+3. 传送点
+4. 出生点
+end note
+LoadingManager -> MapService: 生成单例\n订阅角色进入地图、角色离开地图Response
+LoadingManager -> UserService: 生成单例\n订阅玩家相关Response
+note right
+玩家相关Response：
+1. 玩家登陆
+2. 玩家注册
+3. 创建角色
+4. 进入游戏
+5. 离开游戏
+end note
+
+@enduml
