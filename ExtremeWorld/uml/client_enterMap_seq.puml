@@ -1,0 +1,15 @@
+@startuml
+actor Server
+Server -> MapService: 回包，MapCharacterEnterResponse
+MapService -> User: 当前角色切换地图
+MapService -> CharacterManager: 增加角色
+CharacterManager -> Entities.Character: 实例化角色实体，更新角色信息
+Entities.Character -> DataManager: 根据id从导表缓存获取角色数据
+DataManager --> Entities.Character: 返回对应的CharacterDefine对象
+Entities.Character --> CharacterManager: 返回Character对象
+MapService -> DataManager: 根据id从导表缓存获取地图数据
+DataManager --> MapService: 返回对应的MapDefine对象
+MapService -> User: 更新MapDefine数据
+MapService -> SceneManager: 更新MapDefine数据
+SceneManager -> UnityEngine.SceneManagement.SceneManager: 异步加载地图场景
+@enduml
