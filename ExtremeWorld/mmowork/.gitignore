@@ -63,3 +63,6 @@ App.config
 Entities.Designer.cs
 GameSever.csproj
 Setting.Designer.cs
+Log/
+Assembly-CSharp.csproj
+
