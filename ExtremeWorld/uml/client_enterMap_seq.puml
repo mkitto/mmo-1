@@ -1,0 +1,27 @@
+@startuml
+actor Server
+Server -> MapService: 回包，MapCharacterEnterResponse
+MapService -> User: 当前角色切换地图
+MapService -> CharacterManager: 增加角色
+CharacterManager -> Entities.Character: 实例化角色实体，更新角色信息
+Entities.Character -> DataManager: 根据id从导表缓存获取角色数据
+DataManager --> Entities.Character: 返回对应的CharacterDefine对象
+Entities.Character --> CharacterManager: 返回Character对象
+CharacterManager -> GameObjectManager: 调用OnCharacterEnter，创建角色GameObject
+GameObjectManager -> Resloader: 没有缓存对象，根据角色ID加载资源
+Resloader -> Resources: 根据预制体路径加载资源
+Resources --> Resloader: 返回Object对象
+Resloader -->GameObjectManager: 返回Object对象
+GameObjectManager -> EntityController: 更新角色GameObject的角色控制器信息
+GameObjectManager -> PlayerInputController: 根据角色类型，更新角色GameObject的玩家输入控制器信息
+alt 是玩家角色
+GameObjectManager -> User: 更新Uer单例的当前玩家角色GameObject
+GameObjectManager -> MainPlayerCamera: 更新MainPlayerCamera单例的当前玩家角色GameObject
+end
+GameObjectManager -> UIWorldElementManager: 实例化角色GameObject头顶信息并存入字典
+MapService -> DataManager: 根据id从导表缓存获取地图数据
+DataManager --> MapService: 返回对应的MapDefine对象
+MapService -> User: 更新MapDefine数据
+MapService -> SceneManager: 更新MapDefine数据
+SceneManager -> UnityEngine.SceneManagement.SceneManager: 异步加载地图场景
+@enduml
