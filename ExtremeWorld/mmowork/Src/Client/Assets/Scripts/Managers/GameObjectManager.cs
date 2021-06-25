@@ -8,14 +8,15 @@ using SkillBridge.Message;
 using Models;
 using Managers;
 
-public class GameObjectManager : MonoBehaviour
+public class GameObjectManager : MonoSingleton<GameObjectManager>
 {
     Dictionary<int, GameObject> Characters = new Dictionary<int, GameObject>();
     // Use this for initialization
-    void Start()
+    protected override void OnStart()
     {
         StartCoroutine(InitGameObjects());
-        CharacterManager.Instance.OnCharacterEnter = OnCharacterEnter;
+        CharacterManager.Instance.OnCharacterEnter += OnCharacterEnter;
+        CharacterManager.Instance.OnCharacterLeave += OnCharacterLeave;
     }
 
     private void OnDestory()
@@ -32,6 +33,20 @@ public class GameObjectManager : MonoBehaviour
     void OnCharacterEnter(Character cha)
     {
         CreateCharacterObject(cha);
+    }
+
+    void OnCharacterLeave(Character character)
+    {
+        if (!Characters.ContainsKey(character.entityId))
+        {
+            return;
+        }
+
+        if (Characters[character.entityId] != null)
+        {
+            Destroy(Characters[character.entityId]);
+            this.Characters.Remove(character.entityId);
+        }
     }
 
     IEnumerator InitGameObjects()
