@@ -1,0 +1,9 @@
+@startuml
+
+actor Server
+Server -> UserService: UserGameLeaveResponse
+Server -> MapService: MapCharacterLeaveResponse
+UserService -> CharacterManager: 删除角色逻辑对象\n调用OnCharacterLeave委托
+CharacterManager -> GameObjectManager: 删除角色GameObject对象
+
+@enduml
