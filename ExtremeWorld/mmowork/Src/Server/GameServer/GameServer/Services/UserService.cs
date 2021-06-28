@@ -113,13 +113,10 @@ namespace GameServer.Services
                 MapPosZ = 820,
             };
 
+            Log.InfoFormat("-------OnCreateCharacter: ID: {0}", character.ID);
+
             DBService.Instance.Entities.Characters.Add(character);
-
-            Log.InfoFormat("-------1Characters.Count{0}", sender.Session.User.Player.Characters.Count);
-
             sender.Session.User.Player.Characters.Add(character);
-
-            Log.InfoFormat("-------2Characters.Count{0}", sender.Session.User.Player.Characters.Count);
             DBService.Instance.Entities.SaveChanges();
 
             NetMessage message = new NetMessage();
@@ -133,7 +130,6 @@ namespace GameServer.Services
             }
 
             message.Response.createChar.Result = Result.Success;
-            Log.InfoFormat("-------3Characters.Count{0}", message.Response.createChar.Characters.Count);
             message.Response.createChar.Errormsg = "None";
 
             byte[] data = PackageHandler.PackMessage(message);
@@ -143,8 +139,8 @@ namespace GameServer.Services
         void OnGameEnter(NetConnection<NetSession> sender, UserGameEnterRequest request)
         {
             TCharacter dbchar = sender.Session.User.Player.Characters.ElementAt(request.characterIdx);
-            Log.InfoFormat("UserGameEnterRequest: characterID:{0}:{1} Map:{2}", dbchar.ID, dbchar.Name, dbchar.MapID);
             Character character = CharacterManager.Instance.AddCharacter(dbchar);
+            Log.InfoFormat("UserGameEnterRequest: characterID:{0} Name:{1} Map:{2}", character.Id, character.Info.Name, character.Info.mapId);
 
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
@@ -161,7 +157,7 @@ namespace GameServer.Services
         void OnGameLeave(NetConnection<NetSession> sender, UserGameLeaveRequest request)
         {
             Character character = sender.Session.Character;
-            Log.InfoFormat("UserGameLeaveRequest: characterID:{0}:{1} Map:{2}", character.Id, character.Info.Name, character.Info.mapId);
+            Log.InfoFormat("UserGameLeaveRequest: characterID:{0} Name:{1} Map:{2}", character.Id, character.Info.Name, character.Info.mapId);
 
             CharacterManager.Instance.RemoveCharacter(character.Id);
             MapManager.Instance[character.Info.mapId].CharacterLeave(character.Info);
