@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Entities;
+using Managers;
 
 /*
  * 根据数据驱动来操作角色行为（位置、模型动画）
  * 本地通过输入控制，其他玩家的通过网络发送数据来控制
  */
-public class EntityController : MonoBehaviour
+public class EntityController : MonoBehaviour, IEntityNotify
 {
     public Animator anim;
     public Rigidbody rb;
@@ -34,6 +35,7 @@ public class EntityController : MonoBehaviour
     {
         if (entity != null)
         {
+            EntityManager.Instance.RegisterEntityChangeNotify(entity.entityId, this);
             this.UpdateTransform();
         }
 
@@ -52,6 +54,15 @@ public class EntityController : MonoBehaviour
         this.transform.forward = this.direction;
         this.lastPosition = this.position;
         this.lastRotation = this.rotation;
+    }
+
+    public void OnEntityRemoved()
+    {
+        if (UIWorldElementManager.Instance != null)
+        {
+            UIWorldElementManager.Instance.RemoveCharacterNameBar(this.transform);
+        }
+        Destroy(this.gameObject);
     }
 
     void OnDestory()
