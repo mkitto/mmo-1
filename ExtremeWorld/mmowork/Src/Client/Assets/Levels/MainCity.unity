@@ -5788,6 +5788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2b7d286e9203b4084c8226d0ce9eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  global: 1
 --- !u!4 &201186645
 Transform:
   m_ObjectHideFlags: 0
@@ -32469,7 +32470,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1415483396}
         m_MethodName: BackToCharSelect
         m_Mode: 1
         m_Arguments:
