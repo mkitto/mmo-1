@@ -66,25 +66,26 @@ namespace GameServer.Models
             // 向地图上其他玩家广播该玩家信息
             foreach (var kv in this.MapCharacters)
             {
+                Log.InfoFormat("[TEST]-----CharacterEnter, {0}", kv.Key.ToString());
                 message.Response.mapCharacterEnter.Characters.Add(kv.Value.character.Info);
                 this.SendCharacterEnterMap(kv.Value.connection, character.Info);
             }
             
-            this.MapCharacters[character.Id] = new MapCharacter(conn, character);
+            this.MapCharacters[character.Info.Id] = new MapCharacter(conn, character);
 
             // 向该玩家广播地图上所有玩家信息
             byte[] data = PackageHandler.PackMessage(message);
             conn.SendData(data, 0, data.Length);
         }
 
-        internal void CharacterLeave(NCharacterInfo cha)
+        internal void CharacterLeave(Character character)
         {
-            Log.InfoFormat("CharacterLeave: Map: {0} character: {1}", this.Define.ID, cha.Id);
-            this.MapCharacters.Remove(cha.Id);
+            Log.InfoFormat("CharacterLeave: Map: {0} character: {1}", this.Define.ID, character.Id);
             foreach (var kv in this.MapCharacters)
             {
-                this.SendCharacterLeaveMap(kv.Value.connection, cha);
+                this.SendCharacterLeaveMap(kv.Value.connection, character);
             }
+            this.MapCharacters.Remove(character.Id);
         }
 
         void SendCharacterEnterMap(NetConnection<NetSession> conn, NCharacterInfo character)
@@ -100,7 +101,7 @@ namespace GameServer.Models
             conn.SendData(data, 0, data.Length);
         }
 
-        void SendCharacterLeaveMap(NetConnection<NetSession> conn, NCharacterInfo character)
+        void SendCharacterLeaveMap(NetConnection<NetSession> conn, Character character)
         {
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();

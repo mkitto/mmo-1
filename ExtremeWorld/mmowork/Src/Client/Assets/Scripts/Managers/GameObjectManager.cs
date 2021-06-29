@@ -7,6 +7,7 @@ using Services;
 using SkillBridge.Message;
 using Models;
 using Managers;
+using System.Linq;
 
 public class GameObjectManager : MonoSingleton<GameObjectManager>
 {
@@ -24,12 +25,6 @@ public class GameObjectManager : MonoSingleton<GameObjectManager>
         CharacterManager.Instance.OnCharacterEnter = null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnCharacterEnter(Character cha)
     {
         CreateCharacterObject(cha);
@@ -37,7 +32,7 @@ public class GameObjectManager : MonoSingleton<GameObjectManager>
 
     void OnCharacterLeave(Character character)
     {
-        Debug.Log("------OnCharacterLeave" + Characters.Keys.ToString() + ", " + character.entityId.ToString());
+        Debug.Log("------OnCharacterLeave" + Characters.Keys.ToArray() + ", " + character.entityId.ToString());
         if (!Characters.ContainsKey(character.entityId))
         {
             return;

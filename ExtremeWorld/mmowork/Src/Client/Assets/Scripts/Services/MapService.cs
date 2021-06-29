@@ -35,7 +35,7 @@ public class MapService : Singleton<MapService>, IDisposable
     {
         foreach (var cha in response.Characters)
         {
-            if(User.Instance.CurrentCharacter.Id == cha.Id)
+            if(User.Instance.CurrentCharacter == null || User.Instance.CurrentCharacter.Id == cha.Id)
             {
                 // 更新当前角色数据
                 User.Instance.CurrentCharacter = cha;
@@ -52,7 +52,7 @@ public class MapService : Singleton<MapService>, IDisposable
 
     private void OnMapCharacterLeave(object sender,  MapCharacterLeaveResponse response)
     {
-        Debug.LogFormat("OnMapCharacterLeave: CharID: {0}", response.characterId);
+        Debug.LogFormat("[TEST]OnMapCharacterLeave: CharID: {0}", response.characterId);
         int characterID = response.characterId;
         if (characterID != User.Instance.CurrentCharacter.Id)
         {

@@ -60,9 +60,11 @@ namespace GameServer.Services
                 foreach(var c in user.Player.Characters)
                 {
                     NCharacterInfo info = new NCharacterInfo();
-                    info.Id = c.ID;
+                    info.Id = 0;
                     info.Name = c.Name;
+                    info.Type = CharacterType.Player;
                     info.Class = (CharacterClass)c.Class;
+                    info.Tid = c.ID;
                     message.Response.userLogin.Userinfo.Player.Characters.Add(info);
                 }
             }
@@ -123,10 +125,15 @@ namespace GameServer.Services
             message.Response = new NetMessageResponse();
             message.Response.createChar = new UserCreateCharacterResponse();
 
-            foreach(TCharacter info in sender.Session.User.Player.Characters)
+            foreach(TCharacter c in sender.Session.User.Player.Characters)
             {
-                Character chr = new Character(0, info);
-                message.Response.createChar.Characters.Add(chr.Info);
+                NCharacterInfo info = new NCharacterInfo();
+                info.Id = c.ID;
+                info.Name = c.Name;
+                info.Type = CharacterType.Player;
+                info.Class = (CharacterClass)c.Class;
+                info.Tid = c.ID;
+                message.Response.createChar.Characters.Add(info);
             }
 
             message.Response.createChar.Result = Result.Success;
@@ -160,7 +167,7 @@ namespace GameServer.Services
             Log.InfoFormat("UserGameLeaveRequest: characterID:{0} Name:{1} Map:{2}", character.Id, character.Info.Name, character.Info.mapId);
 
             CharacterManager.Instance.RemoveCharacter(character.Id);
-            MapManager.Instance[character.Info.mapId].CharacterLeave(character.Info);
+            MapManager.Instance[character.Info.mapId].CharacterLeave(character);
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
             message.Response.gameLeave = new UserGameLeaveResponse();
