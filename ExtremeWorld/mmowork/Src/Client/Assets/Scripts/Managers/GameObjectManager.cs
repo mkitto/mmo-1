@@ -37,6 +37,7 @@ public class GameObjectManager : MonoSingleton<GameObjectManager>
 
     void OnCharacterLeave(Character character)
     {
+        Debug.Log("------OnCharacterLeave" + Characters.Keys.ToString() + ", " + character.entityId.ToString());
         if (!Characters.ContainsKey(character.entityId))
         {
             return;

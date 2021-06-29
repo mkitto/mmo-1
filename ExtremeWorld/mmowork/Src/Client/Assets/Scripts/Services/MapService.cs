@@ -7,6 +7,7 @@ using SkillBridge.Message;
 using Models;
 using Services;
 using Managers;
+using Entities;
 
 public class MapService : Singleton<MapService>, IDisposable
 {
@@ -51,7 +52,17 @@ public class MapService : Singleton<MapService>, IDisposable
 
     private void OnMapCharacterLeave(object sender,  MapCharacterLeaveResponse response)
     {
-
+        Debug.LogFormat("OnMapCharacterLeave: CharID: {0}", response.characterId);
+        int characterID = response.characterId;
+        if (characterID != User.Instance.CurrentCharacter.Id)
+        {
+            // 其他玩家角色
+            CharacterManager.Instance.RemoveCharacter(characterID);
+        }
+        else
+        {
+            CharacterManager.Instance.Clear();
+        }
     }
 
     private void EnterMap(int mapId)
