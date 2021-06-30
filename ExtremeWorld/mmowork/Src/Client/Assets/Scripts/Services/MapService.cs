@@ -68,7 +68,16 @@ public class MapService : Singleton<MapService>, IDisposable
 
     private void OnMapEntitySync(object sender, MapEntitySyncResponse response)
     {
-
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendFormat("MapEntityUpdateResponse:  Entitys: {0}", response.entitySyncs.Count);
+        sb.AppendLine();
+        foreach(var entity in response.entitySyncs)
+        {
+            EntityManager.Instance.OnEntitySync(entity);
+            sb.AppendFormat("       [{0}]evt: {1}  entity: {2}", entity.Id, entity.Event, entity.Entity.String());
+            sb.AppendLine();
+        }
+        Debug.Log(sb.ToString());
     }
 
     private void EnterMap(int mapId)
@@ -94,7 +103,7 @@ public class MapService : Singleton<MapService>, IDisposable
         {
             Id = entity.Id,
             Event = entityEvent,
-            Entity = entity,
+            Entity = entity
         };
         NetClient.Instance.SendMessage(message);
     }
