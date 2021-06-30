@@ -18,6 +18,7 @@ public class MapService : Singleton<MapService>, IDisposable
     {
         MessageDistributer.Instance.Subscribe<MapCharacterEnterResponse>(this.OnMapCharacterEnter);
         MessageDistributer.Instance.Subscribe<MapCharacterLeaveResponse>(this.OnMapCharacterLeave);
+        MessageDistributer.Instance.Subscribe<MapEntitySyncResponse>(this.OnMapEntitySync);
     }
 
     public void Init()
@@ -65,6 +66,11 @@ public class MapService : Singleton<MapService>, IDisposable
         }
     }
 
+    private void OnMapEntitySync(object sender, MapEntitySyncResponse response)
+    {
+
+    }
+
     private void EnterMap(int mapId)
     {
         if (DataManager.Instance.Maps.ContainsKey(mapId))
@@ -76,5 +82,20 @@ public class MapService : Singleton<MapService>, IDisposable
         {
             Debug.LogErrorFormat("EnterMap：Map {0} not existed", mapId);
         }    
+    }
+
+    public void SendMapEntitySync(EntityEvent entityEvent, NEntity entity)
+    {
+        Debug.LogFormat("MapEntityUpdateRequest:  ID: {0}  POS: {1}  DIR: {2}  SPD: {3}", entity.Id, entity.Position.String(), entity.Direction.String(), entity.Speed);
+        NetMessage message = new NetMessage();
+        message.Request = new NetMessageRequest();
+        message.Request.mapEntitySync = new MapEntitySyncRequest();
+        message.Request.mapEntitySync.entitySync = new NEntitySync()
+        {
+            Id = entity.Id,
+            Event = entityEvent,
+            Entity = entity,
+        };
+        NetClient.Instance.SendMessage(message);
     }
 }
