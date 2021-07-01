@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Models;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,11 +25,15 @@ public class UICharacterView : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initUI();
+		// 如果有角色，默认选中第一个
+		if (User.Instance.Info.Player.Characters.Count>0)
+        {
+			CurrentCharacter = User.Instance.Info.Player.Characters[0].Tid;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	void initUI()

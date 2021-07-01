@@ -206,6 +206,11 @@ namespace Network
                         continue;
                     }
                     MessageArgs package = this.messageQueue.Dequeue();
+                    if (package == null)
+                    {
+                        continue;
+                    }
+
                     if (package.message.Request != null)
                         MessageDispatch<T>.Instance.Dispatch(package.sender, package.message.Request);
                     if (package.message.Response != null)

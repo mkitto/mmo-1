@@ -28,6 +28,10 @@ namespace GameServer.Services
         private void OnMapEntitySync(NetConnection<NetSession> sender, MapEntitySyncRequest request)
         {
             Character character = sender.Session.Character;
+            if (character == null)
+            {
+                return;
+            }
             Log.InfoFormat("OnMapEntitySync:  characterID: {0}  Name: {1}  Entity.Id: {2}  Evt: {3}  Entity: {4}", character.Id, character.Info.Name, request.entitySync.Event, request.entitySync.Entity.String());
             MapManager.Instance[character.Info.mapId].UpdateEntity(request.entitySync);
         }
