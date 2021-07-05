@@ -23,6 +23,7 @@ namespace Entities
         {
             get
             {
+                UpdateEntityData();
                 return entityData;
             }
             set
@@ -56,6 +57,10 @@ namespace Entities
                 // Q：为啥要 / 100f
                 this.position = Vector3Int.RoundToInt(dir * speed * delta / 100f);
             }
+        }
+
+        private void UpdateEntityData()
+        {
             entityData.Position.FromVector3Int(this.position);
             entityData.Direction.FromVector3Int(this.direction);
             entityData.Speed = this.speed;

@@ -42282,6 +42282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd62c3dcbbe66304caee83c47dc56313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  global: 1
   avatarName: {fileID: 1149343691}
   avatarLevel: {fileID: 47209070}
 --- !u!114 &1415483397
@@ -58756,6 +58757,75 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &1999914572
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220495047041278, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675874016215602, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_Name
+      value: Teleporter
+      objectReference: {fileID: 0}
+    - target: {fileID: 114384018965773732, guid: ce7e10af46691a8409833dbbe67b660d,
+        type: 2}
+      propertyPath: ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126304078940598, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952527342596168, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114229055230655290, guid: ce7e10af46691a8409833dbbe67b660d,
+        type: 2}
+      propertyPath: ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873258585286706, guid: ce7e10af46691a8409833dbbe67b660d,
+        type: 2}
+      propertyPath: ID
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &2003132263
 Prefab:
   m_ObjectHideFlags: 0
