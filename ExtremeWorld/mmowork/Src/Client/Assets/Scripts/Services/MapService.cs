@@ -110,6 +110,7 @@ public class MapService : Singleton<MapService>, IDisposable
 
     public void SendMapTeleport(int teleporterID)
     {
+        MessageBox.Show(teleporterID.ToString());
         Debug.LogFormat("MapTeleportRequest: teleporterID: {0}", teleporterID);
         NetMessage message = new NetMessage();
         message.Request = new NetMessageRequest();

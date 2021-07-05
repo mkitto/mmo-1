@@ -58800,28 +58800,17 @@ Prefab:
       propertyPath: m_Name
       value: Teleporter
       objectReference: {fileID: 0}
-    - target: {fileID: 114384018965773732, guid: ce7e10af46691a8409833dbbe67b660d,
-        type: 2}
-      propertyPath: ID
-      value: 2
+    - target: {fileID: 1411575481345864, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 4126304078940598, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
+    - target: {fileID: 1404915321777872, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 4952527342596168, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114229055230655290, guid: ce7e10af46691a8409833dbbe67b660d,
-        type: 2}
-      propertyPath: ID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114873258585286706, guid: ce7e10af46691a8409833dbbe67b660d,
-        type: 2}
-      propertyPath: ID
-      value: 4
+    - target: {fileID: 1209379375859046, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce7e10af46691a8409833dbbe67b660d, type: 2}
