@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor developer
+developer -> Program: 启动服务器
+Program -> GameServer: 实例化GameServer
+GameServer --> Program: 返回实例
+Program -> GameServer: Init()，初始化
+GameServer -> NetService: 实例化
+NetService --> GameServer: 返回实例
+GameServer -> NetService: 传入port，初始化
+NetService -> TcpSocketListener: 传入address、port、backlog，监听给定的地址和端口\n注册异步接受完成委托
+TcpSocketListener --> NetService: 返回实例
+NetService --> GameServer: 返回true
+Program -> GameServer: Start
+GameServer -> NetService: 启动监听和消息处理器
+NetService -> TcpSocketListener:
+
+@enduml
