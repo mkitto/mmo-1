@@ -15,6 +15,13 @@ TcpSocketListener --> NetService: 返回实例
 NetService --> GameServer: 返回true
 Program -> GameServer: Start
 GameServer -> NetService: 启动监听和消息处理器
-NetService -> TcpSocketListener:
+NetService -> TcpSocketListener: 开始侦听套接字连接
+TcpSocketListener -> TcpSocketListener: 使用指定的地址族、套接字类型和协议初始化Socket类的新实例
+note left
+地址族：IPv4的地址
+套接字类型：Stream
+协议：传输控制协议(TCP)
+end note
+TcpSocketListener -> TcpSocketListener: 绑定EndPoint(address + port)
 
 @enduml
