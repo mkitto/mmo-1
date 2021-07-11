@@ -123,6 +123,7 @@ namespace Network
         {
             this.endPoint = endPoint;
 
+            // SocketAsyncEventArgs是一个套接字操作的类，主要作用是实现socket消息的异步接收和发送
             args = new SocketAsyncEventArgs();
             args.Completed += OnSocketAccepted;
         }

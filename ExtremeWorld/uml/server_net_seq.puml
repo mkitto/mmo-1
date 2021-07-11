@@ -11,6 +11,11 @@ GameServer -> NetService: 实例化
 NetService --> GameServer: 返回实例
 GameServer -> NetService: 传入port，初始化
 NetService -> TcpSocketListener: 传入address、port、backlog，监听给定的地址和端口\n注册异步接受完成委托
+note left
+backlog:
+backlog用来确定已完成队列（完成三次握手等待accept）的长度，
+而不再是已完成队列和未完成连接队列之和（linux 2.2之前）
+end note
 TcpSocketListener --> NetService: 返回实例
 NetService --> GameServer: 返回true
 Program -> GameServer: Start
@@ -22,6 +27,20 @@ note left
 套接字类型：Stream
 协议：传输控制协议(TCP)
 end note
-TcpSocketListener -> TcpSocketListener: 绑定EndPoint(address + port)
+TcpSocketListener -> TcpSocketListener: Bind，绑定EndPoint(address + port)
+TcpSocketListener -> TcpSocketListener: Listen，将Socket置于侦听状态
+TcpSocketListener -> TcpSocketListener: Accept, 异步侦听新连接
+NetService -> MessageDistributer: 启动消息处理器
+MessageDistributer -> MessageDistributer: 置Running为true
+MessageDistributer -> MessageDistributer: 启用多个消息处理线程
+note left
+消息处理线程：
+	while(Running):
+		if 消息队列为空:
+			等待信号
+		else:
+			移除并返回队首的包
+			分发队首的包
+end note
 
 @enduml
