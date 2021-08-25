@@ -102,7 +102,7 @@ namespace GameServer.Services
 
         private void OnCreateCharacter(NetConnection<NetSession> sender, UserCreateCharacterRequest request)
         {
-            Log.InfoFormat("OnCreateCharacter: Name:{0}    Class:{1}", request.Name, request.Class);
+            //Log.InfoFormat("OnCreateCharacter: Name:{0}    Class:{1}", request.Name, request.Class);
 
             TCharacter character = new TCharacter()
             {
@@ -115,7 +115,17 @@ namespace GameServer.Services
                 MapPosZ = 820,
             };
 
-            Log.InfoFormat("-------OnCreateCharacter: ID: {0}", character.ID);
+            //Log.InfoFormat("-------OnCreateCharacter: ID: {0}", character.ID);
+
+            var bag = new TCharacterBag();
+            bag.Owner = character;
+            bag.Items = new byte[0];
+            bag.Unlocked = 20;
+            TCharacterItem it = new TCharacterItem();
+            character.Bag = DBService.Instance.Entities.CharacterBags.Add(bag);
+            character = DBService.Instance.Entities.Characters.Add(character);
+            sender.Session.User.Player.Characters.Add(character);
+            DBService.Instance.Entities.SaveChanges();
 
             DBService.Instance.Entities.Characters.Add(character);
             sender.Session.User.Player.Characters.Add(character);
@@ -164,15 +174,19 @@ namespace GameServer.Services
             Log.InfoFormat("HasItem:[{0}]{1}", itemId, hasItem);
             if (hasItem)
             {
-                character.ItemManager.RemoveItem(itemId, 1);
+                //character.ItemManager.RemoveItem(itemId, 1);
             }
             else
             {
-                character.ItemManager.AddItem(itemId, 1);
+                character.ItemManager.AddItem(1, 200);
+                character.ItemManager.AddItem(2, 100);
+                character.ItemManager.AddItem(3, 30);
+                character.ItemManager.AddItem(4, 120);
             }
             Models.Item item = character.ItemManager.GetItem(itemId);
 
             Log.InfoFormat("Item:[{0}][{1}]", itemId, item);
+            DBService.Instance.Save();
 
             byte[] data = PackageHandler.PackMessage(message);
             sender.SendData(data, 0, data.Length);

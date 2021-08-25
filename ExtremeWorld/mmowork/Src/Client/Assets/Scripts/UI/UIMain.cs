@@ -26,8 +26,8 @@ public class UIMain: MonoSingleton<UIMain> {
 		Services.UserService.Instance.SendGameLeave();
 	}
 
-	public void OnClickTest()
+	public void OnClickBag()
     {
-		UIManager.Instance.Show<UITest>();
+		UIManager.Instance.Show<UIBag>();
     }
 }

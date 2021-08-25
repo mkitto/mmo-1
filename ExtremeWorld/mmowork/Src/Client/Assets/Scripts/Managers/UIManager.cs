@@ -28,7 +28,8 @@ public class UIManager : Singleton<UIManager> {
 	public UIManager()
     {
 		this.UIResource.Add(typeof(UITest), new UIElement() { Resources = "UI/UITest", Cache = true });
-    }
+		this.UIResource.Add(typeof(UIBag), new UIElement() { Resources = "UI/UIBag", Cache = true });
+	}
 	
 	~UIManager()
     {

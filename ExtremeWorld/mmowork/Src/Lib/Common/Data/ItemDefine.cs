@@ -30,10 +30,12 @@ namespace Common.Data
         public string Description { get; set; }
         public ItemType Type { get; set; }
         public string Category { get; set; }
-        public bool CanUse { get; set; }
-        public int UseCD { get; set;  }
+        public bool CanUse { get; set; } 
+        public float UseCD { get; set;  }
         public int Price { get; set; }
         public int SellPrice { get; set; }
+        public int StackLimit { get; set; }  // 堆叠限制
+        public string Icon { get; set; }
         public ItemFunction Function { get; set; }
         public int Param { get; set; }
         public List<int> Params { get; set; }
