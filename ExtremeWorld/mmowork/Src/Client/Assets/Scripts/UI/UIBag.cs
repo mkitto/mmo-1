@@ -24,11 +24,17 @@ public class UIBag : UIWindow {
             }
         }
 		StartCoroutine(InitBags());
+		User.Instance.OnGoldChange += this.SetMoney;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void OnDestroy()
+    {
+		User.Instance.OnGoldChange -= this.SetMoney;
 	}
 
 	IEnumerator InitBags()
@@ -48,16 +54,30 @@ public class UIBag : UIWindow {
         {
 			slots[i].color = Color.gray;
         }
+		this.SetMoney();
 		yield return null;
     }
 
-	public void SetTitle(string title)
+	public void SetMoney()
     {
-		this.money.text = User.Instance.CurrentCharacter.Id.ToString();
+		this.money.text = User.Instance.CurrentCharacter.Gold.ToString();
+    }
+
+	public void Clear()
+    {
+		for(int i = 0; i < slots.Count; i++)
+        {
+			if(slots[i].transform.childCount > 0)
+            {
+				Destroy(slots[i].transform.GetChild(0).gameObject);
+            }
+        }
     }
 
 	public void OnReset()
     {
 		BagManager.Instance.Reset();
-    }
+		Clear();
+		StartCoroutine(InitBags());
+	}
 }

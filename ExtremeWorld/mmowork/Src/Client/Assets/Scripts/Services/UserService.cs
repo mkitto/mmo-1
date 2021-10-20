@@ -231,6 +231,8 @@ namespace Services
                 {
                     ItemManager.Instance.Init(response.Character.Items);
                     BagManager.Instance.Init(response.Character.Bag);
+                    ShopManager.Instance.Init();
+                    EquipManager.Instance.Init(response.Character.Equips);
                 }
             }
         }
