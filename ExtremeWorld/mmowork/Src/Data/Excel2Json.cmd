@@ -10,6 +10,7 @@ json-excel\json-excel json Tables\ Data\
 @copy Data\ShopItemDefine.txt ..\Client\Data\
 @copy Data\EquipDefine.txt ..\Client\Data\
 @copy Data\QuestDefine.txt ..\Client\Data\
+@copy Data\SpawnRuleDefine.txt ..\Client\Data\
 
 @copy Data\CharacterDefine.txt ..\Client\Bin\Data\
 @copy Data\MapDefine.txt ..\Client\Bin\Data\
@@ -21,6 +22,7 @@ json-excel\json-excel json Tables\ Data\
 @copy Data\ShopItemDefine.txt ..\Client\Bin\Data\
 @copy Data\EquipDefine.txt ..\Client\Bin\Data\
 @copy Data\QuestDefine.txt ..\Client\Bin\Data\
+@copy Data\SpawnRuleDefine.txt ..\Client\Bin\Data\
 
 @copy Data\CharacterDefine.txt ..\Server\GameServer\GameServer\bin\Debug\Data\
 @copy Data\MapDefine.txt ..\Server\GameServer\GameServer\bin\Debug\Data\
@@ -32,5 +34,6 @@ json-excel\json-excel json Tables\ Data\
 @copy Data\ShopItemDefine.txt ..\Server\GameServer\GameServer\bin\Debug\Data\
 @copy Data\EquipDefine.txt ..\Server\GameServer\GameServer\bin\Debug\Data\
 @copy Data\QuestDefine.txt ..\Server\GameServer\GameServer\bin\Debug\Data\
+@copy Data\SpawnRuleDefine.txt ..\Server\GameServer\GameServer\bin\Debug\Data\
 
 pause

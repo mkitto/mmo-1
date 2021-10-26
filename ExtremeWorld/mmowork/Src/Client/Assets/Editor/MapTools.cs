@@ -27,14 +27,11 @@ public class MapTools
         foreach (var map in DataManager.Instance.Maps)
         {
             string sceneFile = "Assets/Levels/" + map.Value.Resource + ".unity";
-            EditorUtility.DisplayDialog("提示", "111111111111111", "确定");
             if (!System.IO.File.Exists(sceneFile))
             {
-                EditorUtility.DisplayDialog("提示", "3333333333333", "确定");
                 Debug.LogWarningFormat("Scene {0} not existed!", sceneFile);
                 continue;
             }
-            EditorUtility.DisplayDialog("提示", "22222222222222", "确定");
             EditorSceneManager.OpenScene(sceneFile, OpenSceneMode.Single);
 
             TelepoterObject[] telepoters = GameObject.FindObjectsOfType<TelepoterObject>();
@@ -61,5 +58,59 @@ public class MapTools
         DataManager.Instance.SaveTeleporters();
         EditorSceneManager.OpenScene("Assets/Levels/" + currentScene + ".unity");
         EditorUtility.DisplayDialog("提示", "传送点导出完成", "确定");
+    }
+
+    [MenuItem("MapTools/Export SpawnPoints")]
+    public static void ExportSpawnPoints()
+    {
+        DataManager.Instance.Load();
+        Scene current = EditorSceneManager.GetActiveScene();
+        string currentScene = current.name;
+        
+        if (current.isDirty)
+        {
+            EditorUtility.DisplayDialog("提示", "请先保存当前场景", "确定");
+            return;
+        }
+
+        if (DataManager.Instance.SpawnPoints == null)
+        {
+            DataManager.Instance.SpawnPoints = new Dictionary<int, Dictionary<int, SpawnPointDefine>>();
+        }
+
+        foreach (var map in DataManager.Instance.Maps)
+        {
+            string sceneFile = "Assets/Levels/" + map.Value.Resource + ".unity";
+            if (!System.IO.File.Exists(sceneFile))
+            {
+                Debug.LogWarningFormat("Scene {0} not existed!", sceneFile);
+                continue;
+            }
+            EditorSceneManager.OpenScene(sceneFile, OpenSceneMode.Single);
+
+            SpawnPoint[] spawnpoints = GameObject.FindObjectsOfType<SpawnPoint>();
+
+            if (!DataManager.Instance.SpawnPoints.ContainsKey(map.Value.ID))
+            {
+                DataManager.Instance.SpawnPoints[map.Value.ID] = new Dictionary<int, SpawnPointDefine>();
+            }
+
+            foreach (var sp in spawnpoints)
+            {
+                if (!DataManager.Instance.SpawnPoints[map.Value.ID].ContainsKey(sp.ID))
+                {
+                    DataManager.Instance.SpawnPoints[map.Value.ID][sp.ID] = new SpawnPointDefine();
+                }
+
+                SpawnPointDefine def = DataManager.Instance.SpawnPoints[map.Value.ID][sp.ID];
+                def.ID = sp.ID;
+                def.MapID = map.Value.ID;
+                def.Position = GameObjectTool.WorldToLogicN(sp.transform.position);
+                def.Direction = GameObjectTool.WorldToLogicN(sp.transform.forward);
+            }
+        }
+        DataManager.Instance.SaveSpawnPoints();
+        EditorSceneManager.OpenScene("Assets/Levels/" + currentScene + ".unity");
+        EditorUtility.DisplayDialog("提示", "刷怪点导出完成", "确定");
     }
 }

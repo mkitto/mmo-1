@@ -33,26 +33,39 @@
     "TID": 1001,
     "Name": "恶鬼",
     "Type": "Normal",
-    "Class": "WARRIOR",
     "Resource": "Monster/M1001",
     "InitLevel": 1,
     "Speed": 300
   },
   "1002": {
     "TID": 1002,
-    "Name": "-",
+    "Name": "巨石怪",
     "Type": "Normal",
-    "Class": "WIZARD",
     "Resource": "Monster/M1002",
     "InitLevel": 1,
     "Speed": 300
   },
   "1003": {
     "TID": 1003,
-    "Name": "-",
+    "Name": "蝙蝠怪",
     "Type": "Normal",
-    "Class": "ARCHER",
     "Resource": "Monster/M1003",
+    "InitLevel": 1,
+    "Speed": 300
+  },
+  "1004": {
+    "TID": 1004,
+    "Name": "骷髅",
+    "Type": "Normal",
+    "Resource": "Monster/M1004",
+    "InitLevel": 1,
+    "Speed": 300
+  },
+  "1005": {
+    "TID": 1005,
+    "Name": "巫妖",
+    "Type": "Normal",
+    "Resource": "Monster/M1005",
     "InitLevel": 1,
     "Speed": 300
   }
