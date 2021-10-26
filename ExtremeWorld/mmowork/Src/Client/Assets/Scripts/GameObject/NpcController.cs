@@ -16,6 +16,9 @@ public class NpcController : MonoBehaviour {
 	private bool inInteractive = false;
 
 	NpcDefine npc;
+
+	NpcQuestStatus questStatus;
+
 	// Use this for initialization
 	void Start () {
 		renderer = this.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
@@ -23,8 +26,28 @@ public class NpcController : MonoBehaviour {
 		originColor = renderer.sharedMaterial.color;
 		npc = NPCManager.Instance.GetNpcDefine(this.npcID);
 		this.StartCoroutine(Actions());
+		RefreshNpcStatus();
+		QuestManager.Instance.onQuestStatusChanged += OnQuestStatusChanged;
 	}
 	
+	void OnQuestStatusChanged(Quest quest)
+    {
+		this.RefreshNpcStatus();
+    }
+
+	void RefreshNpcStatus()
+    {
+		questStatus = QuestManager.Instance.GetQuestStatusByNpc(this.npcID);
+		UIWorldElementManager.Instance.AddNpcQuestStatus(this.transform, questStatus);
+    }
+
+	void OnDestroy()
+    {
+		QuestManager.Instance.onQuestStatusChanged -= OnQuestStatusChanged;
+		if (UIWorldElementManager.Instance != null)
+			UIWorldElementManager.Instance.RemoveNpcQuestStatus(this.transform);
+    }
+
 	IEnumerator Actions()
     {
 		while (true)

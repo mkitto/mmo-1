@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entities;
+using Managers;
 
 /*
  * 负责namebar等的增删
@@ -10,8 +11,10 @@ using Entities;
 public class UIWorldElementManager : MonoSingleton<UIWorldElementManager> 
 {
 	public GameObject nameBarPrefab;
+	public GameObject npcStatusPrefab;
 
-	private Dictionary<Transform, GameObject> elements = new Dictionary<Transform, GameObject>();
+	private Dictionary<Transform, GameObject> elementNames = new Dictionary<Transform, GameObject>();
+	private Dictionary<Transform, GameObject> elementStatus = new Dictionary<Transform, GameObject>();
 
     protected override void OnStart()
     {
@@ -30,15 +33,41 @@ public class UIWorldElementManager : MonoSingleton<UIWorldElementManager>
 		goNameBar.GetComponent<UIWorldElement>().owner = owner;
 		goNameBar.GetComponent<UINameBar>().character = character;
 		goNameBar.SetActive(true);
-		this.elements[owner] = goNameBar;
+		this.elementNames[owner] = goNameBar;
+    }
+
+	public void AddNpcQuestStatus(Transform owner, NpcQuestStatus status)
+    {
+		if (this.elementStatus.ContainsKey(owner))
+        {
+			elementStatus[owner].GetComponent<UIQuestStatus>().SetQuestStatus(status);
+        }
+		else
+        {
+			GameObject go = Instantiate(npcStatusPrefab, this.transform);
+			go.name = "NpcQuestStatus" + owner.name;
+			go.GetComponent<UIWorldElement>().owner = owner;
+			go.GetComponent<UIQuestStatus>().SetQuestStatus(status);
+			go.SetActive(true);
+			this.elementStatus[owner] = go;
+		}
+    }
+
+	public void RemoveNpcQuestStatus(Transform owner)
+    {
+		if (this.elementStatus.ContainsKey(owner))
+        {
+			Destroy(this.elementStatus[owner]);
+			this.elementStatus.Remove(owner);
+        }
     }
 
 	public void RemoveCharacterNameBar(Transform owner)
     {
-		if (this.elements.ContainsKey(owner))
+		if (this.elementNames.ContainsKey(owner))
         {
-			Destroy(this.elements[owner]);
-			this.elements.Remove(owner);
+			Destroy(this.elementNames[owner]);
+			this.elementNames.Remove(owner);
         }
     }
 }
