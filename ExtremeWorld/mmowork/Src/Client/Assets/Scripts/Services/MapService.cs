@@ -34,9 +34,10 @@ public class MapService : Singleton<MapService>, IDisposable
 
     private void OnMapCharacterEnter(object sender, MapCharacterEnterResponse response)
     {
+        Debug.LogFormat("OnMapCharacterEnter: {0}, Count: {1}", response.mapId, response.Characters.Count);
         foreach (var cha in response.Characters)
         {
-            if(User.Instance.CurrentCharacter == null || User.Instance.CurrentCharacter.Id == cha.Id)
+            if(User.Instance.CurrentCharacter == null || (cha.Type == CharacterType.Player && User.Instance.CurrentCharacter.Id == cha.Id))
             {
                 // 更新当前角色数据
                 User.Instance.CurrentCharacter = cha;
@@ -53,12 +54,12 @@ public class MapService : Singleton<MapService>, IDisposable
 
     private void OnMapCharacterLeave(object sender,  MapCharacterLeaveResponse response)
     {
-        Debug.LogFormat("[TEST]OnMapCharacterLeave: CharID: {0}", response.characterId);
-        int characterID = response.characterId;
-        if (characterID != User.Instance.CurrentCharacter.Id)
+        Debug.LogFormat("[TEST]OnMapCharacterLeave: CharID: {0}", response.entityId);
+        int entityId = response.entityId;
+        if (entityId != User.Instance.CurrentCharacter.EntityId)
         {
             // 其他玩家角色
-            CharacterManager.Instance.RemoveCharacter(characterID);
+            CharacterManager.Instance.RemoveCharacter(entityId);
         }
         else
         {

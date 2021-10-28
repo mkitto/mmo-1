@@ -15,6 +15,11 @@ namespace Entities
         public NCharacterInfo Info;  // 从服务器同步到客户端的信息
         public Common.Data.CharacterDefine Define;  // 导表数据
 
+        public int Id
+        {
+            get { return this.Info.Id; }
+        }
+
         public string Name
         {
             get
@@ -34,6 +39,15 @@ namespace Entities
         {
             get
             {
+                return this.Info.Type == CharacterType.Player;
+            }
+        }
+
+        public bool IsCurrentPlayer
+        {
+            get
+            {
+                if (!IsPlayer) return false;
                 return this.Info.Id == Models.User.Instance.CurrentCharacter.Id;
             }
         }
@@ -41,7 +55,7 @@ namespace Entities
         public Character(NCharacterInfo info) : base(info.Entity)
         {
             this.Info = info;
-            this.Define = DataManager.Instance.Characters[Info.Tid];
+            this.Define = DataManager.Instance.Characters[Info.ConfigId];
         }
 
         public void MoveForward()

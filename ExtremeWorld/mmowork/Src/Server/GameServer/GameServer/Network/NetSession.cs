@@ -16,18 +16,18 @@ namespace Network
         public TUser User { get; set; }
         public Character Character { get; set; }
         public NEntity Entity { get; set; }
-        NetMessage response;
+        public IPostResponse PostResponser { get; set; }
 
         internal void Disconnected()
         {
+            this.PostResponser = null;
             if (this.Character != null)
             {
-                if (this.Character != null)
-                {
-                    UserService.Instance.CharacterLeave(this.Character);
-                }
+                UserService.Instance.CharacterLeave(this.Character);
             }
         }
+
+        NetMessage response;
 
         public NetMessageResponse Response
         {
@@ -49,9 +49,9 @@ namespace Network
         {
             if (response != null)
             {
-                if (this.Character != null && this.Character.statusManager.HasStatus)
+                if (this.PostResponser != null)
                 {
-                    this.Character.statusManager.ApplyResponse(Response);
+                    this.PostResponser.PostProcess(Response);
                 }
                 byte[] data = PackageHandler.PackMessage(response);
                 response = null;

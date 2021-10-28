@@ -50,7 +50,7 @@ namespace Managers
         public void AddCharacter(SkillBridge.Message.NCharacterInfo cha)
         {
             Character character = new Character(cha);
-            this.Characters[cha.Id] = character;
+            this.Characters[cha.EntityId] = character;
             EntityManager.Instance.AddEntity(character);
 
             if (OnCharacterEnter != null)
@@ -59,16 +59,17 @@ namespace Managers
             }
         }
 
-        public void RemoveCharacter(int characterId)
+        public void RemoveCharacter(int entityId)
         {
-            if (this.Characters.ContainsKey(characterId))
+            Debug.LogFormat("RemoveCharacter: {0}", entityId);
+            if (this.Characters.ContainsKey(entityId))
             {
-                EntityManager.Instance.RemoveEntity(this.Characters[characterId].Info.Entity);
+                EntityManager.Instance.RemoveEntity(this.Characters[entityId].Info.Entity);
                 if (OnCharacterLeave != null)
                 {
-                    OnCharacterLeave(this.Characters[characterId]);
+                    OnCharacterLeave(this.Characters[entityId]);
                 }
-                this.Characters.Remove(characterId);
+                this.Characters.Remove(entityId);
             }
         }
     }

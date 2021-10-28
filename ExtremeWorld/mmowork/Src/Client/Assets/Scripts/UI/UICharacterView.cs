@@ -28,7 +28,7 @@ public class UICharacterView : MonoBehaviour {
 		// 如果有角色，默认选中第一个
 		if (User.Instance.Info.Player.Characters.Count>0)
         {
-			CurrentCharacter = User.Instance.Info.Player.Characters[0].Tid;
+			CurrentCharacter = User.Instance.Info.Player.Characters[0].ConfigId;
 		}
 	}
 	

@@ -35,6 +35,9 @@ namespace GameServer.Models
         }
         internal MapDefine Define;
 
+        /// <summary>
+        /// 地图中的角色，以CharacterID为Key
+        /// </summary>
         Dictionary<int, MapCharacter> MapCharacters = new Dictionary<int, MapCharacter>();
 
         /// <summary>
@@ -126,7 +129,7 @@ namespace GameServer.Models
         {
 
             conn.Session.Response.mapCharacterLeave = new MapCharacterLeaveResponse();
-            conn.Session.Response.mapCharacterLeave.characterId = character.Id;
+            conn.Session.Response.mapCharacterLeave.entityId = character.entityId;
 
             conn.SendResponse();
         }
