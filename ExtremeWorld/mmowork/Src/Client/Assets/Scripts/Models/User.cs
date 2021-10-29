@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Common.Data;
+using SkillBridge.Message;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,6 +28,8 @@ namespace Models
         public MapDefine CurrentMapData { get; set; }
         public SkillBridge.Message.NCharacterInfo CurrentCharacter { get; set; }
         public GameObject CurrentCharacterObject { get; set; }
+
+        public NTeamInfo TeamInfo { get; set; }
 
         public void AddGold(int gold)
         {
